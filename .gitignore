@@ -1,0 +1,14 @@
+# Dependencies and Next.js output
+/node_modules/
+/.next/
+/out/
+
+# Local environment variables and deployment state
+.env*
+!.env.example
+.vercel/
+
+# Local operating system files
+.DS_Store
+.next
+package-lock.json

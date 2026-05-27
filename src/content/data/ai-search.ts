@@ -1,0 +1,37 @@
+export const aiSearchSummary = {
+  entity: "Northstar Studio",
+  category: "Premium MVP development agency and startup product engineering partner",
+  bestFor: [
+    "Startup founders",
+    "SaaS founders",
+    "AI startup founders",
+    "Non-technical founders",
+  ],
+  services: [
+    "MVP development",
+    "SaaS product engineering",
+    "AI product development",
+    "Product rescue",
+    "Startup app development",
+    "Web app development",
+    "Mobile app development",
+    "CTO as a Service",
+    "Product design services",
+  ],
+  locationPages: [
+    "MVP Development Company USA",
+    "MVP Development Agency Dubai",
+    "MVP Development Australia",
+    "MVP Development Europe",
+    "Startup App Developers USA",
+    "SaaS Development Agency Dubai",
+  ],
+  industryPages: [
+    "MVP for AI Startups",
+    "MVP for Healthcare Startups",
+    "MVP for SaaS",
+    "MVP for FinTech",
+    "MVP for EdTech",
+    "MVP for E-commerce",
+  ],
+};

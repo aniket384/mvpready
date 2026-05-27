@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/typography.css";
+@import "../styles/motion.css";
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 4%;
+  --muted: 0 0% 97%;
+  --muted-foreground: 0 0% 40%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 4%;
+  --border: 0 0% 88%;
+  --primary: 0 0% 4%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 221 83% 53%;
+  --accent-foreground: 0 0% 100%;
+}
+
+.dark {
+  --background: 0 0% 2%;
+  --foreground: 0 0% 98%;
+  --muted: 0 0% 6%;
+  --muted-foreground: 0 0% 64%;
+  --card: 0 0% 5%;
+  --card-foreground: 0 0% 98%;
+  --border: 0 0% 15%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 4%;
+  --accent: 213 94% 68%;
+  --accent-foreground: 0 0% 4%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: hsl(var(--accent) / 0.18);
+}
+
+a {
+  text-underline-offset: 4px;
+}
+
+:is(a, button, input, textarea, summary):focus-visible {
+  outline: 2px solid hsl(var(--accent));
+  outline-offset: 3px;
+}
+
+main:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+@media (max-width: 767px) {
+  body:has(.mobile-conversion-bar) footer {
+    padding-bottom: 7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

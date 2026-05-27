@@ -1,0 +1,16 @@
+:root {
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+
+  --container-narrow: 48rem;
+  --container-content: 60rem;
+  --container-default: 72rem;
+  --container-wide: 80rem;
+
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-reveal: 560ms;
+}
