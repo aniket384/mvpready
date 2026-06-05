@@ -1,4 +1,5 @@
 import { ArrowRight, Mail } from "lucide-react";
+import { CalendlyButtonLink } from "@/components/booking/calendly-link";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
@@ -34,6 +35,13 @@ export function FinalCtaSection() {
                   <ArrowRight size={17} />
                   Get the audit — $199
                 </ButtonLink>
+                <CalendlyButtonLink
+                  size="lg"
+                  variant="secondary"
+                  className="border-background/20 bg-transparent text-background hover:bg-background/10"
+                >
+                  Schedule a call
+                </CalendlyButtonLink>
                 <ButtonLink
                   href={`mailto:${siteConfig.links.email}?subject=Audit request`}
                   size="lg"

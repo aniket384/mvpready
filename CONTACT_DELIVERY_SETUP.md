@@ -50,6 +50,7 @@ Add these environment variables in Vercel, or in `.env.local` for local testing:
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://vmp-pro.vercel.app
+NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-calendly-username/your-event
 GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
 GOOGLE_SHEETS_WEBHOOK_SECRET=<the same long random secret>
 ```
@@ -61,6 +62,9 @@ Never commit the real webhook secret.
 domain once that domain is connected. Do not publish a canonical domain that is
 not serving this website.
 
+`NEXT_PUBLIC_CALENDLY_URL` controls every appointment-booking CTA. Use the full
+Calendly event URL, not just `https://calendly.com`.
+
 ## Test Locally
 
 An ignored `.env.local` file has been prepared in the project root. Replace the
@@ -69,6 +73,7 @@ secret:
 
 ```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-calendly-username/your-event
 GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
 GOOGLE_SHEETS_WEBHOOK_SECRET=<the same WEBHOOK_SECRET stored in Apps Script>
 ```

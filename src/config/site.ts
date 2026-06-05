@@ -8,5 +8,6 @@ export const siteConfig = {
   links: {
     email: "aniketmishra384@gmail.com",
     linkedin: "https://www.linkedin.com/in/aniket-mishra23",
+    calendly: process.env.NEXT_PUBLIC_CALENDLY_URL ?? "/contact",
   },
 };

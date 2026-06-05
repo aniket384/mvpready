@@ -1,4 +1,5 @@
 import { ArrowRight, CheckCircle2, Sparkle } from "lucide-react";
+import { CalendlyButtonLink } from "@/components/booking/calendly-link";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 
@@ -44,6 +45,9 @@ export function HeroSection() {
                 >
                   See pricing
                 </ButtonLink>
+                <CalendlyButtonLink size="lg" variant="secondary" className="w-full sm:w-auto">
+                  Schedule a call
+                </CalendlyButtonLink>
               </div>
               <p className="mt-4 text-sm text-muted-foreground">
                 48-hour turnaround. Loom + written report. Credited toward any project.

@@ -1,3 +1,4 @@
+import { CalendlyButtonLink } from "@/components/booking/calendly-link";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Breadcrumbs, type BreadcrumbLink } from "@/components/seo/breadcrumbs";
@@ -16,7 +17,7 @@ export function PageHero({
   eyebrow,
   title,
   description,
-  primaryCta = "Discuss your MVP",
+  primaryCta = "Schedule a call",
   secondaryCta = "View process",
   breadcrumbs,
   showActions = true,
@@ -35,9 +36,9 @@ export function PageHero({
           </p>
           {showActions ? (
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact" size="lg">
+              <CalendlyButtonLink size="lg">
                 {primaryCta}
-              </ButtonLink>
+              </CalendlyButtonLink>
               <ButtonLink href="/process" size="lg" variant="secondary">
                 {secondaryCta}
               </ButtonLink>

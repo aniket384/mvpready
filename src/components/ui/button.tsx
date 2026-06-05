@@ -34,7 +34,7 @@ type ButtonLinkProps = VariantProps<typeof buttonVariants> & {
   href: string;
   children: React.ReactNode;
   className?: string;
-};
+} & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className" | "href">;
 
 export function Button({ className, variant, size, ...props }: ButtonProps) {
   return (
@@ -48,9 +48,29 @@ export function ButtonLink({
   size,
   href,
   children,
+  rel,
+  target,
+  ...props
 }: ButtonLinkProps) {
+  const isExternal = /^https?:\/\//.test(href);
+  const safeRel = target === "_blank" || isExternal ? rel ?? "noopener noreferrer" : rel;
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target={target ?? "_blank"}
+        rel={safeRel}
+        className={cn(buttonVariants({ variant, size }), className)}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Link href={href} className={cn(buttonVariants({ variant, size }), className)}>
+    <Link href={href} className={cn(buttonVariants({ variant, size }), className)} {...props}>
       {children}
     </Link>
   );

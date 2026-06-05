@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { CalendlyButtonLink } from "@/components/booking/calendly-link";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -80,9 +81,9 @@ export default function AuditPage() {
                 Email Aniket to start
                 <ArrowRight size={17} />
               </ButtonLink>
-              <ButtonLink href="/contact" size="lg" variant="secondary">
-                Use the contact form
-              </ButtonLink>
+              <CalendlyButtonLink size="lg" variant="secondary">
+                Schedule a call
+              </CalendlyButtonLink>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
               Payment via Stripe link after the project intro reply. No deposit needed until then.
@@ -157,14 +158,13 @@ export default function AuditPage() {
                 or a 4-week Investor-Ready MVP ($19,500). If the code is
                 unsalvageable, the audit credit applies to a fresh build instead.
               </p>
-              <ButtonLink
-                href={`mailto:${siteConfig.links.email}?subject=$199 Audit request`}
+              <CalendlyButtonLink
                 size="lg"
+                variant="secondary"
                 className="mt-8"
               >
-                Email Aniket
-                <ArrowRight size={17} />
-              </ButtonLink>
+                Schedule a call
+              </CalendlyButtonLink>
             </div>
             <div className="rounded-lg border border-border bg-card p-6">
               <p className="text-sm font-medium text-foreground">A note on capacity</p>

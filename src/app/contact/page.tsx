@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CalendlyButtonLink } from "@/components/booking/calendly-link";
 import { ContactForm } from "@/components/forms/contact-form";
 import { JsonLd } from "@/components/seo/json-ld";
 import { FounderProof } from "@/components/sections/shared/founder-proof";
@@ -65,6 +66,9 @@ export default function ContactPage() {
                 <p className="py-4">Remote collaboration designed for founders in the USA, Europe, UAE, and Australia.</p>
                 <p className="py-4">No obligation and no vague estimate presented without scope context.</p>
               </div>
+              <CalendlyButtonLink size="lg" className="mt-8 w-full sm:w-auto">
+                Schedule a discovery call
+              </CalendlyButtonLink>
             </div>
             <ContactForm onlineSubmissionEnabled={onlineSubmissionEnabled} />
           </div>

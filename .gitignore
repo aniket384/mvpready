@@ -10,5 +10,3 @@
 
 # Local operating system files
 .DS_Store
-.next
-package-lock.json
