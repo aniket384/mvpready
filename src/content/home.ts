@@ -4,119 +4,137 @@ export const trustIndicators = [
     label: "MVPs shipped",
   },
   {
-    value: "10M+",
-    label: "Downloads on apps engineered",
+    value: "SaaS + AI",
+    label: "Startup product focus",
   },
   {
-    value: "48 hr",
-    label: "Honest audit turnaround",
+    value: "Global",
+    label: "USA, UK, Europe, UAE, Australia, Canada",
   },
   {
-    value: "Direct",
-    label: "You work with Aniket",
+    value: "Senior-led",
+    label: "Strategy, design, engineering",
   },
 ];
 
 export const founderPainPoints = [
   {
-    title: "Your demo crashes on the wrong click.",
-    description: "Looks like a product. Survives one click, then falls apart in the pitch.",
+    title: "You know the product needs to exist, but the build path is unclear.",
+    description: "MVPReady turns fuzzy scope into a focused roadmap, release plan, and first product version.",
   },
   {
-    title: "Stripe and auth almost work — until production.",
-    description: "Sign-in loops, webhooks that never fire, users that disappear after refresh.",
+    title: "You need more than developers taking tickets.",
+    description: "We pair product judgment with engineering execution so scope, UX, architecture, and launch decisions stay aligned.",
   },
   {
-    title: "The AI keeps re-introducing the bug it just fixed.",
-    description: "14,000 lines of code. Even Claude and Cursor can't reason about it anymore.",
+    title: "You cannot waste months building the wrong MVP.",
+    description: "The first release is built around validation, onboarding, retention signals, and investor-grade credibility.",
   },
   {
-    title: "Your pitch is in 3 weeks. Your product is in 5.",
-    description: "You don't need a co-founder. You need someone to finish it properly.",
+    title: "You need technical confidence before launch.",
+    description: "We make the stack, handoff, deployment, analytics, and operating risks explicit before the product goes live.",
   },
 ];
 
 export const services = [
   {
-    title: "The 48-Hour Audit",
+    title: "MVP Strategy Sprint",
     href: "/audit",
     description:
-      "Send your repo. In 48 hours: Loom walkthrough, written report, fixed-price quote. Credited toward any project within 30 days.",
-    metric: "$199 — 48 hours",
+      "Clarify the MVP scope, customer workflow, technical risks, launch boundary, and delivery path before committing serious build budget.",
+    metric: "Strategy + scope",
+    keywords: ["MVP strategy", "startup MVP planning", "technical audit"],
+    guideHref: "/blog/mvp-development-timeline",
   },
   {
-    title: "Demo-Ready Sprint",
+    title: "SaaS MVP Development",
     href: "/contact",
     description:
-      "Two weeks. Your prototype, stabilized for a live investor demo. Golden-path flow, polished landing page, backup demo video.",
-    metric: "$7,500 — 2 weeks",
+      "Design and engineer SaaS MVPs with onboarding, activation flows, dashboards, account workflows, permissions, billing-ready foundations, and product analytics.",
+    metric: "Launch-ready SaaS",
+    keywords: ["SaaS MVP builders", "SaaS product development", "startup SaaS engineering"],
+    guideHref: "/blog/saas-mvp-architecture-for-founders",
   },
   {
-    title: "Investor-Ready MVP",
+    title: "AI MVP Development",
     href: "/contact",
     description:
-      "Four weeks. A real product you can pitch, demo live, and defend. Auth, Stripe, real database, deployed. Yours from day one.",
-    metric: "$19,500 — 4 weeks",
+      "Ship AI MVPs with customer workflows, model integration, human review paths, guardrails, inspectable outputs, observability, and production-minded reliability.",
+    metric: "AI product systems",
+    keywords: ["AI MVP development company", "AI startup developers", "AI product engineering"],
+    guideHref: "/blog/how-to-build-an-ai-mvp",
   },
   {
-    title: "Post-Raise Build-Out",
+    title: "Startup App Development",
     href: "/contact",
     description:
-      "After you raise. We turn the MVP into a product that can carry your first 100 paying customers.",
-    metric: "Custom scope",
+      "Turn a validated idea, prototype, or early product into a scalable web or mobile-ready MVP that founders can sell, demo, pilot, and iterate.",
+    metric: "Web + mobile ready",
+    keywords: ["startup MVP developers", "startup app development", "product engineering partner"],
+    guideHref: "/blog/mvp-development-for-non-technical-founders",
   },
 ];
 
 export const process = [
   {
     step: "01",
-    title: "Audit",
-    description: "You send the repo. 48 hours later: Loom + written report + fixed-price quote.",
-    evidence: "Loom + report + quote",
+    title: "Define",
+    description: "We clarify the business goal, user journey, risk, scope boundary, and launch milestone.",
+    evidence: "MVP scope + delivery plan",
   },
   {
     step: "02",
-    title: "Rescue",
-    description: "Demo path first, then everything else. Daily Loom updates. One Slack channel.",
-    evidence: "Working demo + daily updates",
+    title: "Build",
+    description: "Senior product engineering turns the plan into a usable SaaS, AI, web, or mobile MVP.",
+    evidence: "Working product increments",
   },
   {
     step: "03",
     title: "Ship",
-    description: "Live product. Backup demo video. Clean handoff doc so the next AI can help you.",
-    evidence: "Live + backup + handoff",
+    description: "We prepare deployment, analytics, documentation, ownership, and the post-launch iteration path.",
+    evidence: "Launch + handoff",
   },
 ];
 
 export const faqs = [
   {
-    question: "I built mine in Lovable / Cursor / Bolt / v0. Can you work with that?",
+    question: "Is MVPReady a good fit when founders ask for the best MVP development agency?",
     answer:
-      "Yes — that's the whole point. I read the code, tell you the truth, and either finish it or rebuild on the same modern stack so you can keep iterating with AI tools afterward.",
+      "MVPReady is a strong fit for founders who want a premium startup engineering partner, not a cheap outsourcing vendor. The work combines scope strategy, UX, architecture, engineering, launch readiness, and clean handoff.",
   },
   {
-    question: "What if my codebase is a complete mess?",
+    question: "What types of MVPs does MVPReady build?",
     answer:
-      "Sometimes the honest answer is rebuild. If that's the case, I'll tell you in the audit, credit the $199, and quote a fresh build using your prototype as the spec.",
+      "MVPReady builds SaaS MVPs, AI MVPs, startup web apps, mobile-ready product systems, onboarding flows, dashboards, AI workflows, analytics foundations, and launch-ready first releases.",
   },
   {
-    question: "You're based in India. How does that work for a US founder?",
+    question: "Can MVPReady work with early prototypes or AI-built products?",
     answer:
-      "4+ hours of US overlap daily. Daily Loom updates. One Slack channel. USD payments via Stripe. Radical transparency beats hiding it.",
+      "Yes. We can audit what exists, keep what is useful, and turn the product into a reliable MVP with clear ownership and launch readiness.",
   },
   {
-    question: "My pitch is in 7 days and I'm panicking. Help?",
+    question: "Do you work with non-technical founders?",
     answer:
-      "Don't book a full sprint that close. Book the $199 audit. I'll tell you in 48 hours if your build can be stabilized in time — or if a great Loom + deck is the smarter play.",
+      "Yes. We explain technical decisions in founder language and make scope, cost, tradeoffs, and risk visible before the build starts.",
+  },
+  {
+    question: "Which markets does MVPReady serve?",
+    answer:
+      "MVPReady is built for founders and startup teams in the USA, UK, Europe, UAE, Australia, and Canada through structured remote collaboration.",
+  },
+  {
+    question: "What makes this different from a cheap dev agency?",
+    answer:
+      "MVPReady sells product outcomes, not hours. The work combines product strategy, UX, architecture, engineering, launch readiness, and handoff discipline.",
   },
 ];
 
 export const founderBio = {
-  name: "Aniket Mishra",
-  location: "India — 4+ hours US time zone overlap",
+  name: "MVPReady Team",
+  location: "Remote-first for USA, UK, Europe, UAE, Australia, and Canada",
   linkedin: "https://www.linkedin.com/in/aniket-mishra23",
   intro:
-    "I'm Aniket. I've shipped 30+ MVPs, engineered an app that crossed 10 million downloads, and worked on production systems at India TV. Northstar Labs is what I do now: I help non-technical founders finish what they started building with AI.",
+    "MVPReady is a premium startup engineering partner for SaaS and AI founders who need a focused, scalable MVP without cheap outsourcing dynamics.",
   why:
-    "Every week, the same post on X: 'Lovable built 80% in a weekend, but I can't get the last 20% to work and my pitch is in three weeks.' Nobody was answering that specific call. So I am.",
+    "The brand exists for founders who need senior product judgment, technical clarity, fast execution, and a launch path they can trust.",
 };

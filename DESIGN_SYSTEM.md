@@ -1,4 +1,4 @@
-# Northstar Studio Design System
+# MVPReady Design System
 
 This design system is for a premium MVP development agency that should feel like a serious Silicon Valley startup studio: minimal, fast, founder-focused, and high trust.
 

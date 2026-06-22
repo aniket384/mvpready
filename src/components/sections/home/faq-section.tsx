@@ -16,7 +16,7 @@ export function FaqSection() {
               Nothing here will surprise you on the first call.
             </p>
             <ButtonLink href="/audit" variant="secondary" className="mt-8">
-              Get the audit
+              Start the strategy sprint
             </ButtonLink>
           </div>
 

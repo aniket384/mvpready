@@ -7,12 +7,12 @@ import { PageHero } from "@/components/sections/shared/page-hero";
 import { Container } from "@/components/ui/container";
 import { createMetadata } from "@/lib/seo/metadata";
 import { siteConfig } from "@/config/site";
-import { breadcrumbSchema, webPageSchema } from "@/lib/seo/schema";
+import { breadcrumbSchema, schemaGraph, webPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = createMetadata({
   title: "Discuss Your MVP Build",
   description:
-    "Apply to work with Northstar Studio on a premium MVP, SaaS product, AI product, or product rescue engagement.",
+    "Start a conversation with MVPReady about a premium SaaS MVP, AI MVP, startup app, or product strategy engagement.",
   path: "/contact",
   keywords: ["hire MVP developers", "startup product engineering partner"],
 });
@@ -25,17 +25,18 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd
-        data={webPageSchema({
-          name: "Discuss Your MVP Build",
-          description: "Apply to work with Northstar Studio on a premium MVP, SaaS product, AI product, or product rescue engagement.",
-          path: "/contact",
-          topics: ["MVP build review", "Startup product engineering partner"],
-        })}
-      />
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", url: siteConfig.url },
-          { name: "Contact", url: `${siteConfig.url}/contact` },
+        data={schemaGraph([
+          webPageSchema({
+            name: "Discuss Your MVP Build",
+            description:
+              "Start a conversation with MVPReady about a premium SaaS MVP, AI MVP, startup app, or product strategy engagement.",
+            path: "/contact",
+            topics: ["MVP build review", "Startup product engineering partner"],
+          }),
+          breadcrumbSchema([
+            { name: "Home", url: siteConfig.url },
+            { name: "Contact", url: `${siteConfig.url}/contact` },
+          ]),
         ])}
       />
       <PageHero
@@ -57,13 +58,13 @@ export default function ContactPage() {
                 What to expect
               </h2>
               <p className="mt-4 text-muted-foreground">
-                This is a strong fit when a serious product milestone requires senior
-                judgment across scope, user experience, architecture, and launch.
+                This is a strong fit when a serious MVP milestone requires senior
+                judgment across strategy, user experience, architecture, engineering, and launch.
               </p>
               <div className="mt-8 divide-y divide-border border-y border-border text-sm text-muted-foreground">
                 <p className="py-4">We review your brief against product scope, risk, and delivery fit.</p>
                 <p className="py-4">You speak directly with senior product engineering leadership.</p>
-                <p className="py-4">Remote collaboration designed for founders in the USA, Europe, UAE, and Australia.</p>
+                <p className="py-4">Remote collaboration designed for founders in the USA, UK, Europe, UAE, Australia, and Canada.</p>
                 <p className="py-4">No obligation and no vague estimate presented without scope context.</p>
               </div>
               <CalendlyButtonLink size="lg" className="mt-8 w-full sm:w-auto">

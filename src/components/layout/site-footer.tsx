@@ -11,22 +11,22 @@ export function SiteFooter() {
           <div>
             <p className="text-base font-semibold">{siteConfig.name}</p>
             <p className="mt-3 max-w-md text-sm leading-7 text-muted-foreground">
-              We finish the MVPs that AI tools couldn&apos;t. For non-technical
-              founders pitching investors in the next 30 days.
+              From Idea to MVP. Premium startup engineering for SaaS and AI
+              founders building scalable first releases.
             </p>
           </div>
           <div className="grid gap-6 text-sm text-muted-foreground sm:grid-cols-3">
             <p>
               <span className="mb-2 block font-medium text-foreground">Who we help</span>
-              Non-technical founders with an AI-built prototype and an investor deadline.
+              SaaS founders, AI founders, non-technical founders, and funded startup teams.
             </p>
             <p>
               <span className="mb-2 block font-medium text-foreground">Stack</span>
-              Next.js, Supabase, Stripe, Vercel. The same modern stack your AI tool started on.
+              Next.js, TypeScript, Supabase, Stripe, AI APIs, Vercel, and modern product analytics.
             </p>
             <p>
-              <span className="mb-2 block font-medium text-foreground">Founder</span>
-              Aniket Mishra. Based in India, 4+ hrs US overlap. 30+ MVPs shipped.
+              <span className="mb-2 block font-medium text-foreground">Markets</span>
+              USA, UK, Europe, UAE, Australia, and Canada through structured remote collaboration.
             </p>
           </div>
         </div>
@@ -45,7 +45,7 @@ export function SiteFooter() {
             </a>
           </nav>
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Northstar Labs.
+            © {new Date().getFullYear()} MVPReady. All rights reserved.
           </p>
         </div>
       </Container>

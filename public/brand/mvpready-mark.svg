@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">MVPReady mark</title>
+  <rect width="64" height="64" rx="14" fill="#050505"/>
+  <path d="M14 46V18h7.4L32 33.8 42.6 18H50v28h-7.2V30.2L32 46 21.2 30.2V46H14z" fill="#ffffff"/>
+  <path d="M49 10l1.7 5.1 5.3 1.9-5.3 1.8L49 24l-1.7-5.2L42 17l5.3-1.9L49 10z" fill="#5B7CFA"/>
+</svg>

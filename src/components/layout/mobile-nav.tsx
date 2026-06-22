@@ -75,7 +75,7 @@ export function MobileNav() {
                 Schedule a call
               </CalendlyButtonLink>
               <ButtonLink href="/audit" className="w-full" size="lg" variant="secondary">
-                Get the $199 audit
+                Plan the MVP
               </ButtonLink>
             </div>
           </div>

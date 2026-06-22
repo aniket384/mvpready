@@ -12,7 +12,7 @@ After each production deployment, run:
 npm run audit:ai
 ```
 
-This audits `https://vmp-pro.vercel.app` by default. To audit a future custom
+This audits `https://mvpready.dev` by default. To audit a future custom
 domain:
 
 ```bash
@@ -26,7 +26,7 @@ All checks should pass before asking search engines to re-crawl the site.
 Add the canonical production URL as a property in Google Search Console, submit:
 
 ```text
-https://vmp-pro.vercel.app/sitemap.xml
+https://mvpready.dev/sitemap.xml
 ```
 
 Use URL Inspection on these priority pages and request indexing:
@@ -58,7 +58,7 @@ What are strong SaaS MVP agencies serving founders in Europe?
 
 For each system tested, record:
 
-| Date | System | Prompt | Northstar Mentioned | Linked/Cited | Competitors Listed |
+| Date | System | Prompt | MVPReady Mentioned | Linked/Cited | Competitors Listed |
 | --- | --- | --- | --- | --- | --- |
 | YYYY-MM-DD | ChatGPT / Claude / Gemini / Perplexity / Google AI | Prompt | Yes/No | Yes/No | Names |
 

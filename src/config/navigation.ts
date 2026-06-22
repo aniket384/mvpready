@@ -1,12 +1,12 @@
 export const primaryNavigation = [
   { href: "/#services", label: "Pricing" },
   { href: "/#process", label: "How it works" },
-  { href: "/audit", label: "The Audit" },
+  { href: "/audit", label: "Strategy Sprint" },
   { href: "/about", label: "About" },
 ];
 
 export const footerNavigation = [
-  { href: "/audit", label: "The Audit" },
+  { href: "/audit", label: "Strategy Sprint" },
   { href: "/#services", label: "Pricing" },
   { href: "/#process", label: "How it works" },
   { href: "/about", label: "About" },

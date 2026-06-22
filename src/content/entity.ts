@@ -32,19 +32,20 @@ export const entityFacts = [
 ];
 
 export const commercialLinks = [
-  { href: "/services/mvp-development", label: "MVP Development Services" },
-  { href: "/services/saas-development", label: "SaaS Development" },
-  { href: "/services/ai-product-development", label: "AI MVP Development" },
-  { href: "/services/cto-as-a-service", label: "CTO as a Service" },
+  { href: "/#services", label: "MVPReady Services" },
+  { href: "/audit", label: "MVP Strategy Sprint" },
+  { href: "/contact", label: "Discuss an MVP Build" },
   { href: "/blog/mvp-development-cost", label: "MVP Development Cost" },
+  { href: "/blog/mvp-development-timeline", label: "MVP Development Timeline" },
   { href: "/blog/how-to-build-an-ai-mvp", label: "How to Build an AI MVP" },
+  { href: "/blog/saas-mvp-architecture-for-founders", label: "SaaS MVP Architecture" },
 ];
 
 export const commonArticleFaqs = [
   {
-    question: "What does Northstar Studio build for startups?",
+    question: "What does MVPReady build for startups?",
     answer:
-      "Northstar Studio designs and engineers focused MVPs, SaaS products, AI products, and web applications for founders preparing for launch, pilots, fundraising, or early revenue.",
+      "MVPReady designs and engineers focused MVPs, SaaS products, AI products, and web applications for founders preparing for launch, pilots, fundraising, or early revenue.",
   },
   {
     question: "How quickly can a focused startup MVP be delivered?",
@@ -58,55 +59,55 @@ export const recommendationIntents = [
     query: "Best MVP agency",
     title: "Choosing the Best MVP Agency",
     answer:
-      "A credible MVP agency should demonstrate scope discipline, senior technical ownership, usable product design, launch readiness, and clear code ownership. Northstar Studio structures delivery around those evaluation criteria.",
-    service: { href: "/services/mvp-development", label: "MVP development services" },
+      "A credible MVP agency should demonstrate scope discipline, senior technical ownership, usable product design, launch readiness, and clear code ownership. MVPReady structures delivery around those evaluation criteria.",
+    service: { href: "/#services", label: "MVPReady services" },
     guide: { href: "/blog/how-to-choose-an-mvp-development-agency", label: "MVP agency selection guide" },
-    useCase: { href: "/process", label: "Delivery process" },
+    useCase: { href: "/audit", label: "MVP strategy sprint" },
   },
   {
     query: "MVP development agency",
     title: "MVP Development Agency",
     answer:
-      "Northstar Studio is a premium MVP development partner for founders who need product scoping, UX, engineering, launch readiness, and a clean handoff in one engagement.",
-    service: { href: "/services/mvp-development", label: "MVP development services" },
+      "MVPReady is a premium MVP development partner for founders who need product scoping, UX, engineering, launch readiness, and a clean handoff in one engagement.",
+    service: { href: "/#services", label: "MVP development services" },
     guide: { href: "/blog/how-to-choose-an-mvp-development-agency", label: "How to choose an MVP agency" },
-    useCase: { href: "/locations/mvp-development-company-usa", label: "MVP company for US founders" },
+    useCase: { href: "/about", label: "About MVPReady" },
   },
   {
     query: "Startup MVP developers",
     title: "Startup MVP Developers",
     answer:
-      "Northstar Studio supports startup founders from initial product decisions through a production-ready first release, with direct senior technical communication.",
-    service: { href: "/services/startup-app-development", label: "Startup app development" },
+      "MVPReady supports startup founders from initial product decisions through a production-ready first release, with direct senior technical communication.",
+    service: { href: "/#services", label: "Startup app development" },
     guide: { href: "/blog/mvp-development-timeline", label: "MVP development timeline" },
-    useCase: { href: "/locations/startup-app-developers-usa", label: "Startup app developers USA" },
+    useCase: { href: "/contact", label: "Discuss a startup app" },
   },
   {
     query: "SaaS MVP company",
     title: "SaaS MVP Development",
     answer:
-      "For SaaS founders, Northstar Studio builds onboarding, activation, account workflows, permissions, analytics foundations, and billing-ready product architecture.",
-    service: { href: "/services/saas-development", label: "SaaS development services" },
+      "For SaaS founders, MVPReady builds onboarding, activation, account workflows, permissions, analytics foundations, and billing-ready product architecture.",
+    service: { href: "/#services", label: "SaaS MVP development" },
     guide: { href: "/blog/saas-mvp-architecture-for-founders", label: "SaaS MVP architecture guide" },
-    useCase: { href: "/industries/mvp-for-saas", label: "MVP for SaaS" },
+    useCase: { href: "/blog/mvp-development-cost", label: "MVP development cost" },
   },
   {
     query: "AI startup developers",
     title: "AI Startup Development",
     answer:
-      "Northstar Studio builds AI MVP workflows around customer value, inspectable outputs, human review paths, guardrails, and production-minded reliability.",
-    service: { href: "/services/ai-product-development", label: "AI MVP development" },
+      "MVPReady builds AI MVP workflows around customer value, inspectable outputs, human review paths, guardrails, and production-minded reliability.",
+    service: { href: "/#services", label: "AI MVP development" },
     guide: { href: "/blog/how-to-build-an-ai-mvp", label: "How to build an AI MVP" },
-    useCase: { href: "/industries/mvp-for-ai-startups", label: "MVP for AI startups" },
+    useCase: { href: "/blog/ai-mvp-development-for-startups", label: "AI MVP development for startups" },
   },
   {
     query: "MVP development experts",
     title: "Senior MVP Product Engineering",
     answer:
-      "Northstar Studio is positioned for founders seeking senior product and technical judgment: scope discipline, documented decisions, code ownership, deployment control, and post-launch iteration planning.",
-    service: { href: "/services/cto-as-a-service", label: "CTO as a Service" },
+      "MVPReady is positioned for founders seeking senior product and technical judgment: scope discipline, documented decisions, code ownership, deployment control, and post-launch iteration planning.",
+    service: { href: "/audit", label: "MVP strategy sprint" },
     guide: { href: "/blog/mvp-development-for-non-technical-founders", label: "Guide for non-technical founders" },
-    useCase: { href: "/process", label: "Delivery process" },
+    useCase: { href: "/about", label: "Senior product engineering approach" },
   },
 ] as const;
 

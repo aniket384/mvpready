@@ -11,20 +11,20 @@ export function FinalCtaSection() {
         <div className="overflow-hidden rounded-lg border border-border bg-foreground p-8 text-background shadow-lg shadow-black/10 sm:p-10 lg:p-12 dark:shadow-black/30">
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
             <div>
-              <p className="text-sm font-medium opacity-70">One CTA. That&apos;s it.</p>
+              <p className="text-sm font-medium opacity-70">Ready to build?</p>
               <h2 className="mt-3 max-w-3xl text-3xl font-medium leading-tight sm:text-4xl lg:text-5xl">
-                Send me your project. I&apos;ll tell you the truth in 48 hours.
+                Turn the idea into a focused MVP founders can sell, demo, and learn from.
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-8 opacity-75">
-                Repo, Lovable URL, Bolt project — whatever you&apos;ve got.
-                Loom + written verdict in 48 hours.
+                Share the product goal, customer, timeline, and risk. MVPReady
+                will help define the credible next step.
               </p>
             </div>
 
             <div>
               <div className="grid gap-3 rounded-lg border border-background/15 bg-background/[0.04] p-4 text-sm opacity-85">
-                <p>$199 audit, credited toward any paid project within 30 days.</p>
-                <p>If your codebase is unsalvageable, I&apos;ll tell you and refund the audit toward a fresh build.</p>
+                <p>Best fit: SaaS MVPs, AI MVPs, founder-led products, and scalable web apps.</p>
+                <p>Not a fit: vague feature lists, unclear ownership, or rushed builds without product strategy.</p>
               </div>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:justify-end">
                 <ButtonLink
@@ -33,7 +33,7 @@ export function FinalCtaSection() {
                   className="bg-background text-foreground hover:opacity-90"
                 >
                   <ArrowRight size={17} />
-                  Get the audit — $199
+                  Start your MVP
                 </ButtonLink>
                 <CalendlyButtonLink
                   size="lg"
@@ -49,7 +49,7 @@ export function FinalCtaSection() {
                   className="border-background/20 bg-transparent text-background hover:bg-background/10"
                 >
                   <Mail size={17} />
-                  Email Aniket
+                  Email MVPReady
                 </ButtonLink>
               </div>
             </div>

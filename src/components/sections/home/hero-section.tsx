@@ -4,9 +4,9 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 
 const proof = [
-  "30+ MVPs shipped — by the same engineer who'll work on yours",
-  "Engineered an app to 10M+ downloads",
-  "Worked on production systems at India TV",
+  "Premium startup engineering partner",
+  "SaaS and AI MVP development",
+  "Built for USA, UK, Europe, UAE, Australia, and Canada",
 ];
 
 export function HeroSection() {
@@ -18,23 +18,23 @@ export function HeroSection() {
             <div>
               <p className="mb-5 inline-flex items-center gap-2 rounded-md border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
                 <Sparkle className="h-3.5 w-3.5 text-accent" />
-                For founders pitching investors in the next 30 days
+                MVPReady - From Idea to MVP
               </p>
               <h1 className="max-w-4xl text-4xl font-medium leading-[1.04] text-foreground sm:text-6xl lg:text-7xl">
-                You built it with AI. It almost works. Let&apos;s finish it before your pitch.
+                Launch a scalable MVP with senior product engineering.
               </h1>
             </div>
             <div className="intro-rise" style={{ "--intro-delay": "80ms" } as React.CSSProperties}>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
-                Lovable, Cursor and Bolt got you 70%. We ship the 30% that
-                actually matters — auth that works, Stripe that fires, a demo
-                that survives a live click.
+                MVPReady helps SaaS and AI founders turn product ideas,
+                prototypes, and early traction into focused MVPs built for
+                pilots, customers, investors, and the next product iteration.
               </p>
             </div>
             <div className="intro-rise" style={{ "--intro-delay": "140ms" } as React.CSSProperties}>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <ButtonLink href="/audit" size="lg" className="w-full sm:w-auto">
-                  Get a $199 honest audit
+                  Plan your MVP
                   <ArrowRight size={17} className="transition-transform group-hover:translate-x-0.5" />
                 </ButtonLink>
                 <ButtonLink
@@ -43,14 +43,14 @@ export function HeroSection() {
                   variant="secondary"
                   className="w-full sm:w-auto"
                 >
-                  See pricing
+                  Explore engagements
                 </ButtonLink>
                 <CalendlyButtonLink size="lg" variant="secondary" className="w-full sm:w-auto">
                   Schedule a call
                 </CalendlyButtonLink>
               </div>
               <p className="mt-4 text-sm text-muted-foreground">
-                48-hour turnaround. Loom + written report. Credited toward any project.
+                Strategy, design, engineering, launch readiness, and clean handoff in one senior-led engagement.
               </p>
             </div>
             <div className="intro-rise" style={{ "--intro-delay": "190ms" } as React.CSSProperties}>
@@ -70,19 +70,19 @@ export function HeroSection() {
             <div className="rounded-lg border border-border bg-background p-5">
               <div className="flex items-center justify-between border-b border-border pb-4">
                 <div>
-                  <p className="text-sm font-medium">Rescue plan</p>
-                  <p className="mt-1 text-xs text-muted-foreground">Day 1 to pitch day</p>
+                  <p className="text-sm font-medium">MVP operating plan</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Idea to launch</p>
                 </div>
                 <span className="rounded-md bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent">
-                  Typical path
+                  Focused path
                 </span>
               </div>
 
               <div className="mt-5 grid gap-3">
                 {[
-                  ["01", "Audit", "Loom + written report in 48 hours"],
-                  ["02", "Rescue", "Demo path stabilized first, then everything else"],
-                  ["03", "Ship", "Working live demo + backup video + clean handoff"],
+                  ["01", "Define", "Scope, users, launch risk, and technical path"],
+                  ["02", "Build", "Product flows, architecture, integrations, and analytics"],
+                  ["03", "Launch", "Deployment, handoff, iteration plan, and ownership"],
                 ].map(([step, title, text]) => (
                   <div
                     key={step}
@@ -99,9 +99,9 @@ export function HeroSection() {
 
               <div className="mt-5 grid grid-cols-3 gap-3 border-t border-border pt-5">
                 {[
-                  ["$199", "Audit"],
-                  ["$7.5k", "2-week sprint"],
-                  ["$19.5k", "4-week MVP"],
+                  ["SaaS", "MVPs"],
+                  ["AI", "Products"],
+                  ["Global", "Markets"],
                 ].map(([value, label]) => (
                   <div key={label}>
                     <p className="text-lg font-medium">{value}</p>

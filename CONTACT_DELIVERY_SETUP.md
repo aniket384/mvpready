@@ -49,7 +49,7 @@ are rejected unless they include the `WEBHOOK_SECRET`.
 Add these environment variables in Vercel, or in `.env.local` for local testing:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://vmp-pro.vercel.app
+NEXT_PUBLIC_SITE_URL=https://mvpready.dev
 NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-calendly-username/your-event
 GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
 GOOGLE_SHEETS_WEBHOOK_SECRET=<the same long random secret>

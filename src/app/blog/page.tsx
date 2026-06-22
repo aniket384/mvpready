@@ -11,7 +11,7 @@ import { siteConfig } from "@/config/site";
 import { insights } from "@/content/insights";
 import { getTags } from "@/lib/blog/posts";
 import { createMetadata } from "@/lib/seo/metadata";
-import { breadcrumbSchema, webPageSchema } from "@/lib/seo/schema";
+import { breadcrumbSchema, schemaGraph, webPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = createMetadata({
   title: "MVP Development Blog for Startup Founders",
@@ -32,17 +32,18 @@ export default function BlogPage() {
   return (
     <>
       <JsonLd
-        data={webPageSchema({
-          name: "MVP Development Blog for Startup Founders",
-          description: "Founder guides on MVP development cost, timelines, startup validation, AI MVPs, and startup technology decisions.",
-          path: "/blog",
-          topics: ["MVP development cost", "AI MVP development", "SaaS architecture", "Startup validation"],
-        })}
-      />
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", url: siteConfig.url },
-          { name: "Blog", url: `${siteConfig.url}/blog` },
+        data={schemaGraph([
+          webPageSchema({
+            name: "MVP Development Blog for Startup Founders",
+            description:
+              "Founder guides on MVP development cost, timelines, startup validation, AI MVPs, and startup technology decisions.",
+            path: "/blog",
+            topics: ["MVP development cost", "AI MVP development", "SaaS architecture", "Startup validation"],
+          }),
+          breadcrumbSchema([
+            { name: "Home", url: siteConfig.url },
+            { name: "Blog", url: `${siteConfig.url}/blog` },
+          ]),
         ])}
       />
       <PageHero

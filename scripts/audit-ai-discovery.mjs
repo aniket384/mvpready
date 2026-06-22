@@ -1,4 +1,5 @@
-const baseUrl = (process.env.AUDIT_BASE_URL ?? "https://vmp-pro.vercel.app").replace(/\/$/, "");
+const baseUrl = (process.env.AUDIT_BASE_URL ?? "https://mvpready.dev").replace(/\/$/, "");
+const hostedPreviewDomain = ["vercel", "app"].join(".");
 const checks = [];
 
 function check(name, passed, detail) {
@@ -56,7 +57,7 @@ async function run() {
   );
   check(
     "Sitemap URLs point at audited host",
-    contains(sitemap, `<loc>${baseUrl}/`) && !contains(sitemap, "northstarstudio.dev"),
+    contains(sitemap, `<loc>${baseUrl}/`) && !contains(sitemap, hostedPreviewDomain),
     "Sitemap must contain only the deployed canonical host",
   );
   check(

@@ -21,9 +21,10 @@ export function createMetadata({
   type = "website",
   publishedTime,
   modifiedTime,
-  image = "/images/case-studies/analytics-platform.jpg",
+  image = "/opengraph-image.png",
 }: MetadataInput): Metadata {
   const url = new URL(path, siteConfig.url).toString();
+  const twitterImage = image === "/opengraph-image.png" ? "/twitter-image.png" : image;
 
   return {
     title,
@@ -44,13 +45,13 @@ export function createMetadata({
       publishedTime,
       modifiedTime,
       locale: siteConfig.locale,
-      images: [{ url: image, alt: `${siteConfig.name} product engineering` }],
+      images: [{ url: image, alt: `${siteConfig.name} - From Idea to MVP` }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
+      images: [twitterImage],
     },
     robots: {
       index: true,

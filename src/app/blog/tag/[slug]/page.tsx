@@ -9,7 +9,7 @@ import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 import { getPostsByTag, getTags } from "@/lib/blog/posts";
 import { createMetadata } from "@/lib/seo/metadata";
-import { breadcrumbSchema, webPageSchema } from "@/lib/seo/schema";
+import { breadcrumbSchema, schemaGraph, webPageSchema } from "@/lib/seo/schema";
 
 type TagPageProps = {
   params: Promise<{ slug: string }>;
@@ -57,18 +57,18 @@ export default async function TagPage({ params }: TagPageProps) {
   return (
     <>
       <JsonLd
-        data={webPageSchema({
-          name: `${tag.name} Articles for Startup Founders`,
-          description: `Founder-focused articles and guidance about ${tag.name}, MVP development, and startup product engineering.`,
-          path: `/blog/tag/${tag.slug}`,
-          topics: [tag.name, "MVP development", "Startup product engineering"],
-        })}
-      />
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", url: siteConfig.url },
-          { name: "Blog", url: `${siteConfig.url}/blog` },
-          { name: tag.name, url: `${siteConfig.url}/blog/tag/${tag.slug}` },
+        data={schemaGraph([
+          webPageSchema({
+            name: `${tag.name} Articles for Startup Founders`,
+            description: `Founder-focused articles and guidance about ${tag.name}, MVP development, and startup product engineering.`,
+            path: `/blog/tag/${tag.slug}`,
+            topics: [tag.name, "MVP development", "Startup product engineering"],
+          }),
+          breadcrumbSchema([
+            { name: "Home", url: siteConfig.url },
+            { name: "Blog", url: `${siteConfig.url}/blog` },
+            { name: tag.name, url: `${siteConfig.url}/blog/tag/${tag.slug}` },
+          ]),
         ])}
       />
       <section className="border-b border-border py-16 sm:py-20">

@@ -18,7 +18,7 @@ export function PageHero({
   title,
   description,
   primaryCta = "Schedule a call",
-  secondaryCta = "View process",
+  secondaryCta = "Review scope first",
   breadcrumbs,
   showActions = true,
 }: PageHeroProps) {
@@ -39,7 +39,7 @@ export function PageHero({
               <CalendlyButtonLink size="lg">
                 {primaryCta}
               </CalendlyButtonLink>
-              <ButtonLink href="/process" size="lg" variant="secondary">
+              <ButtonLink href="/audit" size="lg" variant="secondary">
                 {secondaryCta}
               </ButtonLink>
             </div>

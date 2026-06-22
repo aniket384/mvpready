@@ -4,12 +4,12 @@ import { PageHero } from "@/components/sections/shared/page-hero";
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 import { createMetadata } from "@/lib/seo/metadata";
-import { breadcrumbSchema } from "@/lib/seo/schema";
+import { breadcrumbSchema, schemaGraph, webPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = createMetadata({
   title: "Privacy Policy",
   description:
-    "Privacy Policy for Northstar Studio, a premium MVP development and startup product engineering partner.",
+    "Privacy Policy for MVPReady, a premium startup engineering partner helping SaaS and AI founders launch scalable MVPs.",
   path: "/privacy-policy",
   keywords: ["privacy policy"],
 });
@@ -18,9 +18,18 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", url: siteConfig.url },
-          { name: "Privacy Policy", url: `${siteConfig.url}/privacy-policy` },
+        data={schemaGraph([
+          webPageSchema({
+            name: "Privacy Policy",
+            description:
+              "Privacy Policy for MVPReady, covering founder inquiries, project details, and website operations.",
+            path: "/privacy-policy",
+            topics: ["Privacy Policy", "Founder inquiry data", "Website operations"],
+          }),
+          breadcrumbSchema([
+            { name: "Home", url: siteConfig.url },
+            { name: "Privacy Policy", url: `${siteConfig.url}/privacy-policy` },
+          ]),
         ])}
       />
       <PageHero

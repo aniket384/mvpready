@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { CalendlyButtonLink } from "@/components/booking/calendly-link";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -12,16 +13,21 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-xl">
       <Container size="wide">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-3" aria-label="Northstar Labs home">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-foreground text-sm font-semibold text-background shadow-sm shadow-black/10">
-              N
-            </span>
-            <span>
-              <span className="block text-sm font-semibold">Northstar Labs</span>
-              <span className="hidden text-[11px] text-muted-foreground sm:block">
-                MVP rescue for AI-stuck founders
-              </span>
-            </span>
+          <Link href="/" className="flex items-center gap-3" aria-label="MVPReady home">
+            <Image
+              src="/brand/mvpready-logo-light.svg"
+              alt="MVPReady"
+              width={196}
+              height={44}
+              className="h-9 w-auto dark:hidden"
+            />
+            <Image
+              src="/brand/mvpready-logo-dark.svg"
+              alt="MVPReady"
+              width={196}
+              height={44}
+              className="hidden h-9 w-auto dark:block"
+            />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
@@ -42,7 +48,7 @@ export function SiteHeader() {
               Schedule call
             </CalendlyButtonLink>
             <ButtonLink href="/audit" size="sm">
-              Get the $199 audit
+              Plan the MVP
               <ArrowRight size={15} />
             </ButtonLink>
           </div>

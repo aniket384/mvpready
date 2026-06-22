@@ -24,7 +24,7 @@ import {
 } from "@/lib/blog/posts";
 import { getArticleBody } from "@/lib/mdx/article-registry";
 import { createMetadata } from "@/lib/seo/metadata";
-import { articleSchema, breadcrumbSchema } from "@/lib/seo/schema";
+import { articleSchema, breadcrumbSchema, schemaGraph } from "@/lib/seo/schema";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -73,13 +73,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <>
       <ReadingProgress />
-      <JsonLd data={articleSchema(insight)} />
       <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", url: siteConfig.url },
-          { name: "Blog", url: `${siteConfig.url}/blog` },
-          { name: insight.category, url: `${siteConfig.url}${getCategoryHref(insight)}` },
-          { name: insight.title, url: `${siteConfig.url}/blog/${insight.slug}` },
+        data={schemaGraph([
+          articleSchema(insight),
+          breadcrumbSchema([
+            { name: "Home", url: siteConfig.url },
+            { name: "Blog", url: `${siteConfig.url}/blog` },
+            { name: insight.category, url: `${siteConfig.url}${getCategoryHref(insight)}` },
+            { name: insight.title, url: `${siteConfig.url}/blog/${insight.slug}` },
+          ]),
         ])}
       />
       <article className="py-16 sm:py-20">

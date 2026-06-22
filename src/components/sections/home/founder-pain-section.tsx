@@ -11,14 +11,14 @@ export function FounderPainSection() {
           <div className="max-w-xl">
             <p className="text-sm font-medium text-accent">Sound familiar?</p>
             <h2 id="founder-pain-title" className="mt-3 text-3xl font-medium leading-tight sm:text-4xl">
-              You&apos;re not bad at this. The tools just have a ceiling — and you&apos;ve hit it.
+              The product can be clear in your head and still hard to build correctly.
             </h2>
             <p className="mt-5 text-lg leading-8 text-muted-foreground">
-              AI tools nail the first 70%. The last 30% is the part an investor
-              actually clicks.
+              MVPReady helps founders turn uncertainty into a scoped SaaS, AI,
+              web, or mobile-ready MVP with senior product engineering judgment.
             </p>
             <ButtonLink href="/audit" variant="secondary" className="mt-8">
-              Send me your project
+              Clarify the MVP scope
               <ArrowRight className="h-4 w-4" />
             </ButtonLink>
           </div>

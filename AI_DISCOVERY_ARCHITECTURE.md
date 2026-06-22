@@ -19,7 +19,7 @@ guarantee a recommendation.
 
 ## Machine-Readable Surface
 
-- Global `Organization` and `WebSite` identify Northstar Studio consistently.
+- Global `Organization` and `WebSite` identify MVPReady consistently.
 - Homepage `ProfessionalService`, `WebPage`, `FAQPage`, and `ItemList` data
   mirror visible capabilities and decision paths.
 - Service pages render `Service`, `WebPage`, `FAQPage`, and breadcrumbs.

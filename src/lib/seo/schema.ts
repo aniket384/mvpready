@@ -2,52 +2,99 @@ import { siteConfig } from "@/config/site";
 import { faqs, services, founderBio } from "@/content/home";
 import type { Insight } from "@/content/insights";
 
-export function organizationSchema() {
+type JsonLdNode = Record<string, unknown>;
+
+const organizationId = `${siteConfig.url}/#organization`;
+const websiteId = `${siteConfig.url}/#website`;
+const founderId = `${siteConfig.url}/about#founder`;
+const logoUrl = `${siteConfig.url}/android-chrome-512x512.png`;
+const markets = ["United States", "United Kingdom", "European Union", "United Arab Emirates", "Australia", "Canada"];
+
+function withContext(node: JsonLdNode) {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${siteConfig.url}/#organization`,
-    name: siteConfig.name,
-    alternateName: ["Northstar Labs by Aniket", "Northstar Studio"],
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/icon.svg`,
-    email: siteConfig.links.email,
-    sameAs: [founderBio.linkedin],
-    description: siteConfig.description,
-    knowsAbout: [
-      "MVP rescue",
-      "Finishing AI-built MVPs",
-      "Lovable code completion",
-      "Cursor codebase rescue",
-      "Bolt project completion",
-      "v0 prototype to production",
-      "Investor-ready MVP development",
-      "Stripe integration for AI-built apps",
-      "Supabase auth fixes",
-      "Next.js MVP engineering",
-    ],
-    knowsLanguage: "en",
-    areaServed: ["United States", "United Kingdom", "Canada", "European Union", "Australia"],
-    founder: {
-      "@type": "Person",
-      "@id": `${siteConfig.url}/about#aniket`,
-      name: founderBio.name,
-      jobTitle: "Founding Engineer",
-      url: `${siteConfig.url}/about`,
-      sameAs: [founderBio.linkedin],
-    },
+    ...node,
   };
 }
 
-export function personSchema() {
+function withoutContext(node: JsonLdNode) {
+  const rest = { ...node };
+  delete rest["@context"];
+  return rest;
+}
+
+export function schemaGraph(nodes: JsonLdNode[]) {
+  const graph = nodes.map(withoutContext);
+
   return {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": `${siteConfig.url}/about#aniket`,
-    name: founderBio.name,
-    jobTitle: "Founding Engineer at Northstar Labs",
+    "@graph": graph,
+  };
+}
+
+export function organizationSchema() {
+  return withContext({
+    "@type": "Organization",
+    "@id": organizationId,
+    name: siteConfig.name,
+    alternateName: ["MVPReady.dev", "MVP Ready"],
+    url: siteConfig.url,
+    logo: {
+      "@type": "ImageObject",
+      "@id": `${siteConfig.url}/#logo`,
+      url: logoUrl,
+      contentUrl: logoUrl,
+      width: 512,
+      height: 512,
+    },
+    image: logoUrl,
+    email: siteConfig.links.email,
+    sameAs: siteConfig.socialProfiles,
     description:
-      "Engineer who has shipped 30+ MVPs and engineered an app to 10M+ downloads. Founder of Northstar Labs.",
+      "MVPReady is a premium startup engineering partner helping founders in the USA, UK, Europe and UAE build scalable SaaS and AI MVPs.",
+    slogan: siteConfig.tagline,
+    knowsAbout: [
+      "MVP development",
+      "SaaS MVP development",
+      "AI MVP development",
+      "AI startup developers",
+      "Startup app development",
+      "Web app development",
+      "Product design services",
+      "Product engineering partner",
+      "Investor-ready MVP development",
+      "Startup product engineering",
+      "Scalable MVP architecture",
+      "Next.js MVP engineering",
+    ],
+    knowsLanguage: "en",
+    areaServed: markets,
+    founder: {
+      "@type": "Person",
+      "@id": founderId,
+      name: founderBio.name,
+      jobTitle: "MVPReady founder",
+      url: `${siteConfig.url}/about`,
+      sameAs: [founderBio.linkedin],
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: siteConfig.links.email,
+      contactType: "sales",
+      areaServed: ["US", "GB", "EU", "AE", "AU", "CA"],
+      availableLanguage: ["English"],
+    },
+  });
+}
+
+export function personSchema() {
+  return withContext({
+    "@type": "Person",
+    "@id": founderId,
+    name: founderBio.name,
+    jobTitle: "MVPReady founder",
+    description:
+      "Founder and product engineering lead behind MVPReady, a premium MVP development partner for SaaS and AI founders.",
     url: `${siteConfig.url}/about`,
     sameAs: [founderBio.linkedin],
     worksFor: { "@id": `${siteConfig.url}/#organization` },
@@ -56,52 +103,52 @@ export function personSchema() {
       "Next.js",
       "Supabase",
       "Stripe integrations",
-      "AI-generated codebase rescue",
+      "AI product development",
+      "SaaS architecture",
       "Production system scaling",
     ],
-    alumniOf: {
-      "@type": "Organization",
-      name: "India TV",
-    },
-  };
+  });
 }
 
 export function websiteSchema() {
-  return {
-    "@context": "https://schema.org",
+  return withContext({
     "@type": "WebSite",
-    "@id": `${siteConfig.url}/#website`,
+    "@id": websiteId,
     url: siteConfig.url,
     name: siteConfig.name,
     description: siteConfig.description,
-    publisher: { "@id": `${siteConfig.url}/#organization` },
+    publisher: { "@id": organizationId },
     inLanguage: "en",
-  };
+  });
 }
 
 export function serviceSchema() {
-  return {
-    "@context": "https://schema.org",
+  return withContext({
     "@type": "ProfessionalService",
     "@id": `${siteConfig.url}/#professional-service`,
     name: siteConfig.name,
     url: siteConfig.url,
-    provider: { "@id": `${siteConfig.url}/#organization` },
-    areaServed: ["United States", "United Kingdom", "Canada", "European Union", "Australia"],
+    provider: { "@id": organizationId },
+    areaServed: markets,
     serviceType: [
-      "MVP Rescue",
-      "AI-Built MVP Completion",
+      "MVP Development",
+      "SaaS MVP Development",
+      "SaaS MVP Builders",
+      "AI MVP Development",
+      "AI MVP Development Company",
+      "Startup MVP Developers",
+      "Product Engineering Partner",
       "Investor-Ready MVP Development",
-      "Codebase Audit",
+      "Product Design and Engineering",
     ],
     audience: {
       "@type": "Audience",
       audienceType:
-        "Non-technical founders with AI-built prototypes (Lovable, Cursor, Bolt, v0, Replit) pitching investors",
+        "SaaS founders, AI founders, non-technical founders, funded startups, and businesses launching scalable MVPs",
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Northstar Labs engagements",
+      name: "MVPReady engagements",
       itemListElement: services.map((service) => ({
         "@type": "Offer",
         name: service.title,
@@ -111,7 +158,7 @@ export function serviceSchema() {
       })),
     },
     description: siteConfig.description,
-  };
+  });
 }
 
 function parsePrice(metric: string): Record<string, unknown> | undefined {
@@ -126,17 +173,16 @@ function parsePrice(metric: string): Record<string, unknown> | undefined {
 }
 
 export function auditOfferSchema() {
-  return {
-    "@context": "https://schema.org",
+  return withContext({
     "@type": "Service",
     "@id": `${siteConfig.url}/audit#service`,
-    name: "The 48-Hour Audit",
+    name: "MVP Strategy Sprint",
     url: `${siteConfig.url}/audit`,
     description:
-      "48-hour honest audit of your AI-built MVP. Loom walkthrough plus written report. Credited toward any paid project within 30 days.",
-    provider: { "@id": `${siteConfig.url}/#organization` },
-    areaServed: ["United States", "United Kingdom", "Canada", "European Union", "Australia"],
-    serviceType: "MVP audit",
+      "Structured MVP strategy sprint for founders who need scope clarity, technical risk review, and a credible build plan before development.",
+    provider: { "@id": organizationId },
+    areaServed: markets,
+    serviceType: "MVP strategy sprint",
     offers: {
       "@type": "Offer",
       price: 199,
@@ -145,15 +191,14 @@ export function auditOfferSchema() {
       url: `${siteConfig.url}/audit`,
       itemOffered: {
         "@type": "Service",
-        name: "Codebase audit and rescue assessment",
+        name: "MVP scope and technical readiness assessment",
       },
     },
-  };
+  });
 }
 
 export function faqPageSchema() {
-  return {
-    "@context": "https://schema.org",
+  return withContext({
     "@type": "FAQPage",
     "@id": `${siteConfig.url}/#faq`,
     mainEntity: faqs.map((faq) => ({
@@ -164,20 +209,20 @@ export function faqPageSchema() {
         text: faq.answer,
       },
     })),
-  };
+  });
 }
 
 export function breadcrumbSchema(items: { name: string; url: string }[]) {
-  return {
-    "@context": "https://schema.org",
+  return withContext({
     "@type": "BreadcrumbList",
+    "@id": `${items[items.length - 1]?.url ?? siteConfig.url}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
       item: item.url,
     })),
-  };
+  });
 }
 
 export function webPageSchema({
@@ -193,30 +238,30 @@ export function webPageSchema({
 }) {
   const url = `${siteConfig.url}${path}`;
 
-  return {
-    "@context": "https://schema.org",
+  return withContext({
     "@type": "WebPage",
     "@id": `${url}#webpage`,
     url,
     name,
     description,
-    isPartOf: { "@id": `${siteConfig.url}/#website` },
+    isPartOf: { "@id": websiteId },
     about: topics.map((topic) => ({
       "@type": "Thing",
       name: topic,
     })),
-    publisher: { "@id": `${siteConfig.url}/#organization` },
+    publisher: { "@id": organizationId },
     inLanguage: "en",
-  };
+  });
 }
 
 export function articleSchema(insight: Insight) {
   const url = `${siteConfig.url}/blog/${insight.slug}`;
 
-  return {
-    "@context": "https://schema.org",
-    "@type": "Article",
+  return withContext({
+    "@type": "BlogPosting",
+    "@id": `${url}#blogposting`,
     headline: insight.title,
+    name: insight.title,
     description: insight.description,
     abstract: insight.takeaways.join(" "),
     datePublished: insight.publishedAt,
@@ -225,16 +270,18 @@ export function articleSchema(insight: Insight) {
     keywords: insight.tags.join(", "),
     url,
     inLanguage: "en",
+    image: [`${siteConfig.url}/opengraph-image.png`],
     author: {
-      "@type": "Person",
-      "@id": `${siteConfig.url}/about#aniket`,
-      name: founderBio.name,
+      "@type": "Organization",
+      "@id": organizationId,
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
     publisher: {
-      "@id": `${siteConfig.url}/#organization`,
+      "@id": organizationId,
     },
     isPartOf: {
-      "@id": `${siteConfig.url}/#website`,
+      "@id": websiteId,
     },
     about: insight.tags.map((tag) => ({
       "@type": "Thing",
@@ -242,7 +289,7 @@ export function articleSchema(insight: Insight) {
     })),
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": url,
+      "@id": `${url}#webpage`,
     },
-  };
+  });
 }

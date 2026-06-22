@@ -10,7 +10,7 @@ import { siteConfig } from "@/config/site";
 import { blogCategories, getBlogCategory } from "@/content/blog-taxonomy";
 import { getPostsByCategory } from "@/lib/blog/posts";
 import { createMetadata } from "@/lib/seo/metadata";
-import { breadcrumbSchema, webPageSchema } from "@/lib/seo/schema";
+import { breadcrumbSchema, schemaGraph, webPageSchema } from "@/lib/seo/schema";
 
 type CategoryPageProps = {
   params: Promise<{ slug: string }>;
@@ -45,18 +45,18 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   return (
     <>
       <JsonLd
-        data={webPageSchema({
-          name: `${category.name} Guides for Startup Founders`,
-          description: category.description,
-          path: `/blog/category/${category.slug}`,
-          topics: [category.name, "MVP development", "Startup product engineering"],
-        })}
-      />
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", url: siteConfig.url },
-          { name: "Blog", url: `${siteConfig.url}/blog` },
-          { name: category.name, url: `${siteConfig.url}/blog/category/${category.slug}` },
+        data={schemaGraph([
+          webPageSchema({
+            name: `${category.name} Guides for Startup Founders`,
+            description: category.description,
+            path: `/blog/category/${category.slug}`,
+            topics: [category.name, "MVP development", "Startup product engineering"],
+          }),
+          breadcrumbSchema([
+            { name: "Home", url: siteConfig.url },
+            { name: "Blog", url: `${siteConfig.url}/blog` },
+            { name: category.name, url: `${siteConfig.url}/blog/category/${category.slug}` },
+          ]),
         ])}
       />
       <section className="border-b border-border py-16 sm:py-20">

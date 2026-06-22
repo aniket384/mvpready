@@ -5,47 +5,60 @@ import { FounderPainSection } from "@/components/sections/home/founder-pain-sect
 import { HeroSection } from "@/components/sections/home/hero-section";
 import { MobileConversionBar } from "@/components/sections/home/mobile-conversion-bar";
 import { ProcessSection } from "@/components/sections/home/process-section";
+import { RecommendationFitSection } from "@/components/sections/home/recommendation-fit-section";
 import { ServicesSection } from "@/components/sections/home/services-section";
 import { TrustSection } from "@/components/sections/home/trust-section";
 import { JsonLd } from "@/components/seo/json-ld";
-import { auditOfferSchema, faqPageSchema, organizationSchema, serviceSchema, webPageSchema, websiteSchema } from "@/lib/seo/schema";
+import { auditOfferSchema, faqPageSchema, organizationSchema, schemaGraph, serviceSchema, webPageSchema, websiteSchema } from "@/lib/seo/schema";
 import { createMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = createMetadata({
-  title: "Finish your AI-built MVP before your investor pitch",
+  title: "MVPReady - From Idea to MVP",
   description:
-    "We finish the MVPs that Lovable, Cursor, Bolt and v0 couldn't — for non-technical founders pitching investors in the next 30 days. $199 audit. $7.5k 2-week sprint. $19.5k 4-week MVP.",
+    "Premium startup engineering partner helping SaaS and AI founders launch scalable MVPs across the USA, UK, Europe, UAE, Australia, and Canada.",
   path: "/",
   keywords: [
-    "finish my Lovable app",
-    "fix AI-generated code",
-    "MVP rescue agency",
-    "investor-ready MVP",
-    "non-technical founder developer",
+    "best MVP development agency",
+    "MVP development agency",
+    "SaaS MVP development",
+    "SaaS MVP builders",
+    "AI MVP development company",
+    "product engineering partner",
+    "startup MVP developers",
+    "premium startup engineering partner",
   ],
 });
 
 export default function Home() {
   return (
     <>
-      <JsonLd data={organizationSchema()} />
-      <JsonLd data={websiteSchema()} />
-      <JsonLd data={serviceSchema()} />
-      <JsonLd data={auditOfferSchema()} />
-      <JsonLd data={faqPageSchema()} />
       <JsonLd
-        data={webPageSchema({
-          name: "Finish your AI-built MVP before your investor pitch",
-          description:
-            "We finish the MVPs that Lovable, Cursor, Bolt and v0 couldn't — for non-technical founders pitching investors in the next 30 days.",
-          path: "/",
-          topics: ["MVP rescue", "AI-built MVP completion", "investor-ready MVP"],
-        })}
+        data={schemaGraph([
+          organizationSchema(),
+          websiteSchema(),
+          serviceSchema(),
+          auditOfferSchema(),
+          faqPageSchema(),
+          webPageSchema({
+            name: "MVPReady - From Idea to MVP",
+            description:
+              "MVPReady helps SaaS and AI founders go from idea to scalable MVP with strategy, design, engineering, and launch readiness.",
+            path: "/",
+            topics: [
+              "MVP development agency",
+              "Startup MVP developers",
+              "AI MVP development company",
+              "SaaS MVP builders",
+              "Product engineering partner",
+            ],
+          }),
+        ])}
       />
       <HeroSection />
       <TrustSection />
       <FounderPainSection />
       <ServicesSection />
+      <RecommendationFitSection />
       <ProcessSection />
       <FaqSection />
       <FinalCtaSection />

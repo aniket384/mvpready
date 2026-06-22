@@ -37,7 +37,7 @@ function doPost(event) {
       MailApp.sendEmail({
         to: recipients,
         replyTo: lead.email,
-        name: "Northstar Studio Website",
+        name: "MVPReady Website",
         subject: "New MVP inquiry - " + (lead.company || lead.name),
         body: leadEmailBody(receivedAt, lead),
       });
@@ -121,7 +121,7 @@ function cellValue(value) {
 
 function leadEmailBody(receivedAt, lead) {
   return [
-    "A new startup inquiry was submitted through the website.",
+    "A new MVPReady startup inquiry was submitted through the website.",
     "",
     "Received: " + receivedAt,
     "Name: " + lead.name,

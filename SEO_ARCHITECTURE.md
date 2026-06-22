@@ -14,7 +14,7 @@ connected, and structured for indexing and retrieval.
 
 ## Entity Definition
 
-Primary entity: `Northstar Studio`.
+Primary entity: `MVPReady`.
 
 Entity attributes are centralized in `src/content/entity.ts`:
 

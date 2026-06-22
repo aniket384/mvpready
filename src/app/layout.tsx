@@ -21,38 +21,61 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Finish your AI-built MVP before your investor pitch | Northstar Labs",
-    template: "%s | Northstar Labs",
+    default: "MVPReady - From Idea to MVP",
+    template: "%s | MVPReady",
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/brand/mvpready-mark.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/favicon.ico"],
+  },
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Finish your AI-built MVP before your investor pitch",
+    title: "MVPReady - From Idea to MVP",
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "MVPReady - From Idea to MVP",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Finish your AI-built MVP before your investor pitch",
+    title: "MVPReady - From Idea to MVP",
     description: siteConfig.description,
+    images: [
+      {
+        url: "/twitter-image.png",
+        alt: "MVPReady - From Idea to MVP",
+      },
+    ],
   },
   robots: {
     index: true,
     follow: true,
   },
   keywords: [
-    "finish my Lovable app",
-    "fix AI-generated code",
-    "Cursor codebase rescue",
-    "Bolt project to production",
-    "MVP rescue agency",
-    "investor-ready MVP",
-    "non-technical founder developer",
+    "MVP development agency",
+    "SaaS MVP development",
+    "AI MVP development company",
+    "startup MVP developers",
+    "premium startup engineering partner",
+    "scalable MVP development",
+    "non-technical founder MVP",
   ],
 };
 

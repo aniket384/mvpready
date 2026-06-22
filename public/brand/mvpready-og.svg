@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#050505"/>
+  <path d="M0 520h1200v110H0z" fill="#0B0B0D"/>
+  <circle cx="1035" cy="120" r="150" fill="#5B7CFA" opacity=".16"/>
+  <circle cx="110" cy="555" r="180" fill="#14B8A6" opacity=".10"/>
+  <rect x="76" y="74" width="64" height="64" rx="14" fill="#FFFFFF"/>
+  <path d="M90 120V92h7.4l10.6 15.8L118.6 92h7.4v28h-7.2v-15.8L108 120l-10.8-15.8V120H90z" fill="#050505"/>
+  <path d="M125 84l1.7 5.1 5.3 1.9-5.3 1.8L125 98l-1.7-5.2L118 91l5.3-1.9L125 84z" fill="#5B7CFA"/>
+  <text x="158" y="113" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="650">MVPReady</text>
+  <text x="158" y="138" fill="#A1A1AA" font-family="Inter, Arial, sans-serif" font-size="18">From Idea to MVP.</text>
+  <text x="76" y="288" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="680" letter-spacing="-2">Premium startup engineering</text>
+  <text x="76" y="370" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="680" letter-spacing="-2">for SaaS and AI founders.</text>
+  <text x="80" y="455" fill="#A1A1AA" font-family="Inter, Arial, sans-serif" font-size="28">Strategy, product design, engineering, launch readiness, and clean handoff.</text>
+  <text x="80" y="570" fill="#D4D4D8" font-family="Inter, Arial, sans-serif" font-size="22">USA · UK · Europe · UAE · Australia · Canada</text>
+  <text x="940" y="570" fill="#D4D4D8" font-family="Inter, Arial, sans-serif" font-size="22">mvpready.dev</text>
+</svg>

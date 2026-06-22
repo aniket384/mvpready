@@ -4,12 +4,12 @@ import { PageHero } from "@/components/sections/shared/page-hero";
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 import { createMetadata } from "@/lib/seo/metadata";
-import { breadcrumbSchema } from "@/lib/seo/schema";
+import { breadcrumbSchema, schemaGraph, webPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = createMetadata({
   title: "Terms",
   description:
-    "Terms for using the Northstar Studio website and discussing MVP development, SaaS, AI product, and product engineering services.",
+    "Terms for using the MVPReady website and discussing MVP development, SaaS, AI product, and startup engineering services.",
   path: "/terms",
   keywords: ["terms"],
 });
@@ -18,9 +18,18 @@ export default function TermsPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", url: siteConfig.url },
-          { name: "Terms", url: `${siteConfig.url}/terms` },
+        data={schemaGraph([
+          webPageSchema({
+            name: "Terms of Use",
+            description:
+              "Terms for using the MVPReady website and discussing MVP strategy, design, and engineering work.",
+            path: "/terms",
+            topics: ["Terms of Use", "MVP development services", "Startup engineering engagements"],
+          }),
+          breadcrumbSchema([
+            { name: "Home", url: siteConfig.url },
+            { name: "Terms", url: `${siteConfig.url}/terms` },
+          ]),
         ])}
       />
       <PageHero
@@ -30,7 +39,7 @@ export default function TermsPage() {
         ]}
         eyebrow="Terms"
         title="Terms of Use"
-        description="These terms describe the basic conditions for using this website and contacting Northstar Studio about potential product engineering work."
+        description="These terms describe the basic conditions for using this website and contacting MVPReady about potential MVP strategy, design, and engineering work."
         showActions={false}
       />
       <section className="py-20 sm:py-24">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { FormField } from "@/components/forms/form-field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 
 export function ContactForm({ onlineSubmissionEnabled }: { onlineSubmissionEnabled: boolean }) {
+  const statusId = useId();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState("");
   const [emailFallback, setEmailFallback] = useState(
@@ -76,21 +77,26 @@ export function ContactForm({ onlineSubmissionEnabled }: { onlineSubmissionEnabl
   }
 
   return (
-    <form aria-busy={submitting} onSubmit={onSubmit} className="relative grid gap-5 rounded-lg border border-border bg-card p-6">
+    <form
+      aria-busy={submitting}
+      aria-describedby={statusMessage ? statusId : undefined}
+      onSubmit={onSubmit}
+      className="relative grid gap-5 rounded-lg border border-border bg-card p-6"
+    >
       <FormField label="Name" htmlFor="contact-name">
-        <Input id="contact-name" name="name" autoComplete="name" required />
+        <Input id="contact-name" name="name" autoComplete="name" required disabled={submitting} />
       </FormField>
       <FormField label="Email" htmlFor="contact-email">
-        <Input id="contact-email" name="email" type="email" autoComplete="email" required />
+        <Input id="contact-email" name="email" type="email" autoComplete="email" required disabled={submitting} />
       </FormField>
       <FormField label="Company" htmlFor="contact-company">
-        <Input id="contact-company" name="company" autoComplete="organization" />
+        <Input id="contact-company" name="company" autoComplete="organization" disabled={submitting} />
       </FormField>
       <FormField label="Budget range" htmlFor="contact-budget">
-        <Input id="contact-budget" name="budget" placeholder="Example: $25k-$75k" />
+        <Input id="contact-budget" name="budget" placeholder="Example: $25k-$75k" disabled={submitting} />
       </FormField>
       <FormField label="What are you building?" htmlFor="contact-message">
-        <Textarea id="contact-message" name="message" required />
+        <Textarea id="contact-message" name="message" required disabled={submitting} />
       </FormField>
       <input type="hidden" name="source" value="/contact" />
       <div className="absolute -left-[10000px]" aria-hidden="true">
@@ -110,11 +116,11 @@ export function ContactForm({ onlineSubmissionEnabled }: { onlineSubmissionEnabl
           {siteConfig.links.email}
         </a>
       </p>
-      {status === "success" ? (
-        <p aria-live="polite" className="text-sm text-muted-foreground">{statusMessage}</p>
+      {status === "success" && statusMessage ? (
+        <p id={statusId} role="status" className="text-sm text-muted-foreground">{statusMessage}</p>
       ) : null}
-      {status === "error" ? (
-        <div aria-live="polite" className="grid gap-3 text-sm">
+      {status === "error" && statusMessage ? (
+        <div id={statusId} role="alert" className="grid gap-3 text-sm">
           <p className="text-red-600">{statusMessage}</p>
           <a
             className="inline-flex w-fit items-center rounded-md border border-border px-4 py-2 font-medium text-foreground hover:bg-muted"
