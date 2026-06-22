@@ -3,6 +3,8 @@
 /.next/
 /out/
 tsconfig.tsbuildinfo
+/playwright-report/
+/test-results/
 
 # Local environment variables and deployment state
 .env*

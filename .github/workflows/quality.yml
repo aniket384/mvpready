@@ -1,0 +1,59 @@
+name: Quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint, build, and E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://mvpready.dev
+          NEXT_PUBLIC_CONTACT_EMAIL: hello@mvpready.dev
+          NEXT_PUBLIC_CALENDLY_URL: /contact
+
+      - name: Playwright E2E
+        run: npm run test:e2e -- --project=desktop-chromium --project=iphone --project=android --project=tablet
+        env:
+          NEXT_PUBLIC_SITE_URL: https://mvpready.dev
+          NEXT_PUBLIC_CONTACT_EMAIL: hello@mvpready.dev
+          NEXT_PUBLIC_CALENDLY_URL: /contact
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
