@@ -1,5 +1,5 @@
 import { ArrowRight, CheckCircle2, Sparkle } from "lucide-react";
-import { CalendlyButtonLink } from "@/components/booking/calendly-link";
+import { BookingButton } from "@/components/booking/booking-button";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 
@@ -45,9 +45,9 @@ export function HeroSection() {
                 >
                   Explore engagements
                 </ButtonLink>
-                <CalendlyButtonLink size="lg" variant="secondary" className="w-full sm:w-auto">
-                  Schedule a call
-                </CalendlyButtonLink>
+                <BookingButton size="lg" variant="secondary" className="w-full sm:w-auto">
+                  Book Free Discovery Call
+                </BookingButton>
               </div>
               <p className="mt-4 text-sm text-muted-foreground">
                 Strategy, design, engineering, launch readiness, and clean handoff in one senior-led engagement.

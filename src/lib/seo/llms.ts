@@ -121,7 +121,7 @@ ${insightLines}
 
 ## Contact
 - Email: ${siteConfig.links.email}
-- Schedule: ${link("Schedule a discovery call", siteConfig.links.calendly)}
+- Schedule: ${link("Book a discovery call", `${siteConfig.url}/contact`)}
 - MVP strategy: ${link("MVP Strategy Sprint", `${siteConfig.url}/audit`)}
 - About: ${link("About MVPReady", `${siteConfig.url}/about`)}
 - Blog: ${link("Founder guides", `${siteConfig.url}/blog`)}

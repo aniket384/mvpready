@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { CalendlyButtonLink } from "@/components/booking/calendly-link";
+import { BookingButton } from "@/components/booking/booking-button";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -81,9 +81,9 @@ export default function AuditPage() {
                 Email MVPReady to start
                 <ArrowRight size={17} />
               </ButtonLink>
-              <CalendlyButtonLink size="lg" variant="secondary">
-                Schedule a call
-              </CalendlyButtonLink>
+              <BookingButton size="lg" variant="secondary">
+                Talk to an MVP Expert
+              </BookingButton>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
               If the project is a fit, the strategy sprint leads into a focused MVP build plan.
@@ -157,13 +157,13 @@ export default function AuditPage() {
                 The output can become a SaaS MVP, AI MVP, startup app, or
                 product design and engineering engagement with explicit scope.
               </p>
-              <CalendlyButtonLink
+              <BookingButton
                 size="lg"
                 variant="secondary"
                 className="mt-8"
               >
-                Schedule a call
-              </CalendlyButtonLink>
+                Schedule a 30-Minute Call
+              </BookingButton>
             </div>
             <div className="rounded-lg border border-border bg-card p-6">
               <p className="text-sm font-medium text-foreground">A note on fit</p>

@@ -11,7 +11,7 @@ MVPReady is a premium startup engineering partner helping SaaS and AI founders l
 - Explain MVPReady's services clearly.
 - Rank on Google for MVP/SaaS/AI startup development searches.
 - Be readable by AI systems through structured data, semantic content, sitemap, robots, and `llms.txt`.
-- Route users toward a Calendly call, contact form, or MVP Strategy Sprint.
+- Route users toward a native Google Meet discovery call, contact form, or MVP Strategy Sprint.
 
 ## 2. Product Summary
 
@@ -34,7 +34,7 @@ Target users:
 
 Primary conversion actions:
 
-- Schedule a call through Calendly.
+- Book a native Google Meet discovery call.
 - Submit the contact form.
 - Start the MVP Strategy Sprint.
 - Read founder guides in the blog.
@@ -185,7 +185,7 @@ User lands on homepage
   -> Reviews services
   -> Reads founder-fit answers for MVP/SaaS/AI queries
   -> Reviews process and FAQs
-  -> Clicks Plan the MVP, Schedule call, or Contact
+  -> Clicks Plan the MVP, Book Free Discovery Call, or Contact
 ```
 
 ## 8. Contact Flow
@@ -197,7 +197,7 @@ It displays:
 - Page hero.
 - Trust/proof section.
 - What-to-expect messaging.
-- Calendly call CTA.
+- Native Google Meet booking CTA.
 - Contact form.
 
 The contact form component is `src/components/forms/contact-form.tsx`.
@@ -244,32 +244,51 @@ GOOGLE_SHEETS_WEBHOOK_SECRET=
 NEXT_PUBLIC_CONTACT_EMAIL=hello@mvpready.dev
 ```
 
-## 9. Calendly Flow
+## 9. Native Booking Flow
 
-Calendly CTA behavior is handled by `src/components/booking/calendly-link.tsx`.
+Booking CTA behavior is handled by `src/components/booking/booking-button.tsx`.
 
-It uses:
+Availability and booking creation are handled by:
+
+- Availability API: `src/app/api/booking/availability/route.ts`
+- Booking API: `src/app/api/booking/book/route.ts`
+- Calendar service: `src/lib/google/calendar.ts`
+- Slot generator: `src/lib/booking/availability.ts`
+- Validation: `src/lib/validations/booking.ts`
+
+It uses private server env variables:
 
 ```env
-NEXT_PUBLIC_CALENDLY_URL=
+GOOGLE_CALENDAR_ID=
+GOOGLE_CALENDAR_CLIENT_EMAIL=
+GOOGLE_CALENDAR_PRIVATE_KEY=
+GOOGLE_CALENDAR_NOTIFICATION_EMAIL=hello@mvpready.dev
 ```
 
-If Calendly is configured:
+Booking behavior:
 
 ```text
-CTA opens Calendly event URL in a new tab
+CTA opens booking modal
+  -> Client detects visitor timezone
+  -> Client fetches /api/booking/availability
+  -> API reads busy blocks from Google Calendar
+  -> User selects a 30-minute slot
+  -> User enters name, email, and optional company
+  -> Client sends POST /api/booking/book
+  -> API validates input, honeypot, and rate limit
+  -> API re-checks the slot against Google Calendar busy blocks
+  -> API creates "MVPReady Discovery Call"
+  -> Google Calendar generates a Google Meet link
+  -> Calendar invite is sent to the founder and hello@mvpready.dev
+  -> User sees a confirmation screen with the Meet link
 ```
 
-If Calendly is not configured:
-
-```text
-CTA links to /contact
-```
-
-Calendly CTAs appear in:
+Booking CTAs appear in:
 
 - Header
 - Mobile menu
+- Hero section
+- Services section
 - Homepage final CTA
 - Audit page
 - Contact page
@@ -321,7 +340,7 @@ User opens article
   -> MDX article body renders
   -> FAQs answer founder concerns
   -> Related posts support internal linking
-  -> CTA routes user to contact or Calendly
+  -> CTA routes user to contact or native booking
 ```
 
 Blog SEO:
@@ -535,11 +554,12 @@ Performance choices:
 - Small reusable components.
 - Reduced JavaScript on static pages.
 - No heavy analytics or third-party widgets loaded directly.
-- Calendly opens as link instead of embedding heavy iframe.
+- Booking loads as a small client modal only when a founder opens it.
 
 Client Components:
 
 - `src/components/forms/contact-form.tsx`
+- `src/components/booking/booking-button.tsx`
 - `src/components/forms/newsletter-form.tsx`
 - `src/components/blog/reading-progress.tsx`
 - `src/components/blog/share-actions.tsx`
@@ -560,9 +580,12 @@ Variables:
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://mvpready.dev
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-calendly-username/your-event
 GOOGLE_SHEETS_WEBHOOK_URL=
 GOOGLE_SHEETS_WEBHOOK_SECRET=
+GOOGLE_CALENDAR_ID=primary-or-calendar-id@group.calendar.google.com
+GOOGLE_CALENDAR_CLIENT_EMAIL=google-service-account@project-id.iam.gserviceaccount.com
+GOOGLE_CALENDAR_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GOOGLE_CALENDAR_NOTIFICATION_EMAIL=hello@mvpready.dev
 NEXT_PUBLIC_CONTACT_EMAIL=hello@mvpready.dev
 NEXT_PUBLIC_LINKEDIN_URL=https://www.linkedin.com/company/mvpready
 NEXT_PUBLIC_X_URL=
@@ -640,10 +663,13 @@ Required production env vars in Vercel:
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://mvpready.dev
-NEXT_PUBLIC_CALENDLY_URL=<Calendly event URL>
 NEXT_PUBLIC_CONTACT_EMAIL=hello@mvpready.dev
 GOOGLE_SHEETS_WEBHOOK_URL=<Apps Script /exec URL>
 GOOGLE_SHEETS_WEBHOOK_SECRET=<same secret as Apps Script>
+GOOGLE_CALENDAR_ID=<Google Calendar ID>
+GOOGLE_CALENDAR_CLIENT_EMAIL=<Google service account client email>
+GOOGLE_CALENDAR_PRIVATE_KEY=<Google service account private key with newline escapes>
+GOOGLE_CALENDAR_NOTIFICATION_EMAIL=hello@mvpready.dev
 NEXT_PUBLIC_LINKEDIN_URL=<MVPReady LinkedIn URL>
 ```
 
@@ -667,16 +693,17 @@ Homepage
   -> Services section explains offers
   -> Recommendation fit section answers evaluation questions
   -> Process and FAQ explain how work happens
-  -> CTA routes to audit/contact/Calendly
+  -> CTA routes to audit/contact/native booking
 ```
 
 ### Journey B: Founder Wants To Book A Call
 
 ```text
 Any CTA
-  -> CalendlyButtonLink checks NEXT_PUBLIC_CALENDLY_URL
-  -> If configured, opens Calendly
-  -> If not configured, routes to /contact
+  -> BookingButton opens the native booking modal
+  -> User selects a local-time slot
+  -> Calendar API creates Google Meet event
+  -> Confirmation email and calendar invite are sent automatically
 ```
 
 ### Journey C: Founder Sends A Project Brief
@@ -789,4 +816,3 @@ src/app/robots.ts                        robots.txt
 src/config/site.ts                       Brand/site configuration
 next.config.ts                           Security headers and redirects
 ```
-

@@ -30,7 +30,7 @@ Every change must preserve:
 - Lighthouse Best Practices at 100.
 - Lighthouse SEO at 100.
 - Premium MVPReady brand consistency.
-- Working contact, Calendly, SEO, sitemap, robots, and `llms.txt` behavior.
+- Working contact, native Google Calendar booking, SEO, sitemap, robots, and `llms.txt` behavior.
 
 Never leave the project in a failing or half-finished state.
 
@@ -129,7 +129,7 @@ Do not hide meaningful content from screen readers unless it is purely decorativ
 ## Performance Rules
 
 - Avoid embedded third-party widgets when a link is enough.
-- Do not embed Calendly iframe globally.
+- Do not use Calendly or Cal.com. Booking must remain native through Google Calendar and Google Meet.
 - Avoid large client components.
 - Avoid unnecessary `use client`.
 - Avoid unnecessary `priority` image preloads.
@@ -209,4 +209,3 @@ A change is complete only when:
 - No broken internal links are introduced.
 - The final state is committed.
 - Push is attempted when credentials are available.
-

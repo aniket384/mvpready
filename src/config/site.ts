@@ -12,7 +12,6 @@ export const siteConfig = {
     twitter: process.env.NEXT_PUBLIC_X_URL,
     github: process.env.NEXT_PUBLIC_GITHUB_URL,
     youtube: process.env.NEXT_PUBLIC_YOUTUBE_URL,
-    calendly: process.env.NEXT_PUBLIC_CALENDLY_URL ?? "/contact",
   },
   socialProfiles: [
     process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://www.linkedin.com/in/aniket-mishra23",

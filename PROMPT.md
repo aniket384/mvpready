@@ -54,7 +54,7 @@ For every requested change:
 2. Preserve existing architecture and design patterns.
 3. Implement the smallest production-safe change.
 4. Protect SEO, schema, sitemap, robots, and `llms.txt`.
-5. Protect contact form, Calendly, and conversion flows.
+5. Protect contact form, native booking, and conversion flows.
 6. Run validation.
 7. Fix any failures.
 8. Commit with a meaningful message.
@@ -206,4 +206,3 @@ When reporting completion:
 - List validation results.
 - Mention anything that could not be completed.
 - Keep the response concise.
-

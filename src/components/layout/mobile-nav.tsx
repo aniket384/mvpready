@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { CalendlyButtonLink } from "@/components/booking/calendly-link";
+import { BookingButton } from "@/components/booking/booking-button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { ButtonLink } from "@/components/ui/button";
 import { primaryNavigation } from "@/config/navigation";
@@ -71,9 +71,9 @@ export function MobileNav() {
               ))}
             </nav>
             <div className="mt-4 grid gap-2">
-              <CalendlyButtonLink className="w-full" size="lg">
-                Schedule a call
-              </CalendlyButtonLink>
+              <BookingButton className="w-full" size="lg">
+                Book Free Discovery Call
+              </BookingButton>
               <ButtonLink href="/audit" className="w-full" size="lg" variant="secondary">
                 Plan the MVP
               </ButtonLink>

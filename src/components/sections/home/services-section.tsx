@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { BookingButton } from "@/components/booking/booking-button";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { services } from "@/content/home";
@@ -64,10 +65,14 @@ export function ServicesSection() {
             </article>
           ))}
         </div>
-        <p className="mt-10 text-sm text-muted-foreground">
-          Two active projects at a time. If the calendar is full, you&apos;ll
-          see it on the audit page.
-        </p>
+        <div className="mt-10 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
+            Two active projects at a time. If the calendar is full, the fastest path is to send the brief first.
+          </p>
+          <BookingButton variant="secondary" className="w-full sm:w-auto">
+            Talk to an MVP Expert
+          </BookingButton>
+        </div>
       </Container>
     </section>
   );

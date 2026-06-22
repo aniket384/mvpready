@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { CalendlyButtonLink } from "@/components/booking/calendly-link";
+import { BookingButton } from "@/components/booking/booking-button";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { ButtonLink } from "@/components/ui/button";
@@ -44,9 +44,9 @@ export function SiteHeader() {
 
           <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
-            <CalendlyButtonLink size="sm" variant="secondary">
-              Schedule call
-            </CalendlyButtonLink>
+            <BookingButton size="sm" variant="secondary">
+              Book Free Discovery Call
+            </BookingButton>
             <ButtonLink href="/audit" size="sm">
               Plan the MVP
               <ArrowRight size={15} />
