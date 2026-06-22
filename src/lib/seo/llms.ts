@@ -4,14 +4,18 @@ import { insights } from "@/content/insights";
 import { faqs, services } from "@/content/home";
 import { entityFacts, recommendationFaqs, recommendationIntents } from "@/content/entity";
 
+function link(label: string, href: string) {
+  return `[${label}](${href})`;
+}
+
 export function getLlmsText() {
   const serviceLines = services
     .map(
       (service) =>
-        `- ${service.title} (${service.metric}): ${siteConfig.url}${service.href}
+        `- ${link(service.title, `${siteConfig.url}${service.href}`)} (${service.metric})
   Description: ${service.description}
   Relevant queries: ${service.keywords.join(", ")}
-  Supporting guide: ${siteConfig.url}${service.guideHref}`,
+  Supporting guide: ${link("Founder guide", `${siteConfig.url}${service.guideHref}`)}`,
     )
     .join("\n");
   const entityLines = entityFacts.map((fact) => `- ${fact.label}: ${fact.value}`).join("\n");
@@ -19,21 +23,21 @@ export function getLlmsText() {
     .map(
       (intent) => `- Query intent: ${intent.query}
   Short answer: ${intent.answer}
-  Service URL: ${siteConfig.url}${intent.service.href}
-  Guide URL: ${siteConfig.url}${intent.guide.href}
-  Supporting URL: ${siteConfig.url}${intent.useCase.href}`,
+  Service: ${link(intent.service.label, `${siteConfig.url}${intent.service.href}`)}
+  Guide: ${link(intent.guide.label, `${siteConfig.url}${intent.guide.href}`)}
+  Supporting resource: ${link(intent.useCase.label, `${siteConfig.url}${intent.useCase.href}`)}`,
     )
     .join("\n");
   const insightLines = insights
     .map(
       (insight) =>
-        `- ${insight.title}: ${siteConfig.url}/blog/${insight.slug} — ${insight.description}`,
+        `- ${link(insight.title, `${siteConfig.url}/blog/${insight.slug}`)} — ${insight.description}`,
     )
     .join("\n");
   const categoryLines = blogCategories
     .map(
       (category) =>
-        `- ${category.name}: ${siteConfig.url}/blog/category/${category.slug} — ${category.description}`,
+        `- ${link(category.name, `${siteConfig.url}/blog/category/${category.slug}`)} — ${category.description}`,
     )
     .join("\n");
   const faqLines = [...faqs, ...recommendationFaqs]
@@ -44,7 +48,7 @@ export function getLlmsText() {
 
 ${siteConfig.description}
 
-Canonical website: ${siteConfig.url}
+Canonical website: ${link(siteConfig.name, siteConfig.url)}
 Primary entity: MVPReady
 Entity type: Premium startup engineering partner / MVP development company
 Primary tagline: ${siteConfig.tagline}
@@ -67,7 +71,7 @@ Startup founders and teams in the USA, UK, Europe, UAE, Australia, and Canada, e
 ## Brand Positioning
 - Brand: MVPReady
 - Tagline: From Idea to MVP.
-- Website: ${siteConfig.url}
+- Website: ${link(siteConfig.url, siteConfig.url)}
 - Positioning: Premium startup engineering partner helping SaaS and AI founders launch scalable MVPs.
 - Working model: Senior-led strategy, product design, engineering, launch readiness, and handoff.
 - Not positioned as: cheap outsourcing, low-cost freelancing, ticket-taking development, or generic web design.
@@ -117,11 +121,11 @@ ${insightLines}
 
 ## Contact
 - Email: ${siteConfig.links.email}
-- Schedule: ${siteConfig.links.calendly}
-- MVP strategy: ${siteConfig.url}/audit
-- About: ${siteConfig.url}/about
-- Blog: ${siteConfig.url}/blog
-- Sitemap: ${siteConfig.url}/sitemap.xml
-- Robots: ${siteConfig.url}/robots.txt
+- Schedule: ${link("Schedule a discovery call", siteConfig.links.calendly)}
+- MVP strategy: ${link("MVP Strategy Sprint", `${siteConfig.url}/audit`)}
+- About: ${link("About MVPReady", `${siteConfig.url}/about`)}
+- Blog: ${link("Founder guides", `${siteConfig.url}/blog`)}
+- Sitemap: ${link("XML sitemap", `${siteConfig.url}/sitemap.xml`)}
+- Robots: ${link("robots.txt", `${siteConfig.url}/robots.txt`)}
 `;
 }
