@@ -50,7 +50,6 @@ Add these environment variables in Vercel, or in `.env.local` for local testing:
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://mvpready.dev
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-calendly-username/your-event
 GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
 GOOGLE_SHEETS_WEBHOOK_SECRET=<the same long random secret>
 ```
@@ -62,8 +61,10 @@ Never commit the real webhook secret.
 domain once that domain is connected. Do not publish a canonical domain that is
 not serving this website.
 
-`NEXT_PUBLIC_CALENDLY_URL` controls every appointment-booking CTA. Use the full
-Calendly event URL, not just `https://calendly.com`.
+The same Apps Script webhook can also power the native Google Calendar booking
+modal. To enable booking from your personal Google account, open Apps Script
+**Services** and add **Calendar API** as an Advanced Google Service. Then deploy
+a new web app version after pasting the latest `contact-leads.gs`.
 
 ## Test Locally
 
@@ -73,7 +74,6 @@ secret:
 
 ```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-calendly-username/your-event
 GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
 GOOGLE_SHEETS_WEBHOOK_SECRET=<the same WEBHOOK_SECRET stored in Apps Script>
 ```
@@ -95,6 +95,15 @@ Submit a form inquiry after deployment and confirm:
 1. A new row appears in the `Leads` tab.
 2. Column `Notification status` says `Email sent`.
 3. Both configured inboxes receive the lead notification.
+
+For booking verification:
+
+1. Open any `Book Free Discovery Call` CTA.
+2. Select an available slot.
+3. Submit name and email.
+4. Confirm a row appears in the `Bookings` tab.
+5. Confirm a Google Calendar event and Google Meet link are created.
+6. Confirm the founder receives the calendar invite.
 
 If email sending fails after a row is stored, the submission remains in the sheet
 and its notification status identifies the failure.

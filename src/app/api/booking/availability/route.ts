@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { availabilityRange, buildAvailability } from "@/lib/booking/availability";
 import { getBusyWindows, isGoogleCalendarConfigured } from "@/lib/google/calendar";
+import {
+  getAppsScriptBusyWindows,
+  isGoogleBookingAppsScriptConfigured,
+} from "@/lib/integrations/google-booking-apps-script";
 import { getRequestIp, checkRateLimit } from "@/lib/security/rate-limit";
 import { validateTimeZone } from "@/lib/validations/booking";
 
@@ -19,7 +23,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Too many requests. Please try again shortly." }, { status: 429 });
   }
 
-  if (!isGoogleCalendarConfigured()) {
+  if (!isGoogleCalendarConfigured() && !isGoogleBookingAppsScriptConfigured()) {
     return NextResponse.json(
       {
         error:
@@ -34,7 +38,9 @@ export async function GET(request: Request) {
   const range = availabilityRange();
 
   try {
-    const busyWindows = await getBusyWindows(range);
+    const busyWindows = isGoogleCalendarConfigured()
+      ? await getBusyWindows(range)
+      : await getAppsScriptBusyWindows(range);
     return NextResponse.json(buildAvailability({ busyWindows, requestedTimeZone: timeZone }));
   } catch (error) {
     console.error("Booking availability failed", error);

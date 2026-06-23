@@ -5,6 +5,11 @@ import {
   getBusyWindows,
   isGoogleCalendarConfigured,
 } from "@/lib/google/calendar";
+import {
+  createAppsScriptDiscoveryCall,
+  getAppsScriptBusyWindows,
+  isGoogleBookingAppsScriptConfigured,
+} from "@/lib/integrations/google-booking-apps-script";
 import { checkRateLimit, getRequestIp } from "@/lib/security/rate-limit";
 import { validateBookingPayload } from "@/lib/validations/booking";
 
@@ -23,7 +28,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Too many booking attempts. Please try again later." }, { status: 429 });
   }
 
-  if (!isGoogleCalendarConfigured()) {
+  if (!isGoogleCalendarConfigured() && !isGoogleBookingAppsScriptConfigured()) {
     return NextResponse.json(
       {
         error:
@@ -44,10 +49,13 @@ export async function POST(request: Request) {
   const endDate = new Date(startDate.getTime() + bookingDurationMinutes * 60 * 1000);
 
   try {
-    const busyWindows = await getBusyWindows({
+    const busyRange = {
       timeMin: new Date(startDate.getTime() - 60 * 1000),
       timeMax: new Date(endDate.getTime() + 60 * 1000),
-    });
+    };
+    const busyWindows = isGoogleCalendarConfigured()
+      ? await getBusyWindows(busyRange)
+      : await getAppsScriptBusyWindows(busyRange);
 
     if (slotIsBusy(startDate, busyWindows)) {
       return NextResponse.json(
@@ -56,10 +64,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const booking = await createDiscoveryCall({
-      payload: validation.data,
-      startDate,
-    });
+    const booking = isGoogleCalendarConfigured()
+      ? await createDiscoveryCall({
+          payload: validation.data,
+          startDate,
+        })
+      : await createAppsScriptDiscoveryCall({
+          payload: validation.data,
+          startDate,
+          durationMinutes: bookingDurationMinutes,
+        });
 
     return NextResponse.json({
       message: "Your MVPReady discovery call is booked.",
