@@ -2,7 +2,7 @@
 
 This project uses a native booking modal backed by Google Calendar and Google Meet. It does not use Calendly or Cal.com.
 
-There are two supported modes. The app uses the service account when its variables are configured. Otherwise, it falls back to the existing Google Apps Script webhook.
+There are two supported modes. When both are configured, the app prefers the Google Apps Script webhook because it runs as your Google account and can send attendee calendar invitations. The service account path is a fallback for creating events on a shared calendar.
 
 ## Option A: Existing Apps Script Webhook
 
@@ -37,14 +37,16 @@ In Apps Script:
    - `BOOKING_CALENDAR_ID` if you do not want to use your primary calendar.
    - `BOOKING_SHEET_NAME`, default `Bookings`.
    - `BOOKING_RECIPIENTS`, default uses `LEAD_RECIPIENTS`.
-6. Deploy a new web app version.
+6. Deploy a new web app version. Apps Script deployments do not update automatically after code changes.
 7. Keep access as **Anyone**.
 
 The same webhook handles lead storage, availability, booking creation, Google Meet link generation, and Calendar invitations.
 
 ## Option B: Service Account
 
-Use this for a dedicated production calendar.
+Use this for a dedicated production calendar fallback.
+
+Important limitation: a service account on a personal Gmail calendar cannot invite attendees unless you use Google Workspace domain-wide delegation. For personal Gmail, use Option A for attendee invites.
 
 ### Required Vercel Environment Variables
 
@@ -86,9 +88,29 @@ The app converts `\n` back into real newlines on the server.
 - Visitors see slots in their local timezone.
 - The meeting duration is 30 minutes.
 - The event title is `MVPReady Discovery Call`.
-- Google Calendar creates the Google Meet link.
-- Calendar invites are sent to the founder and `GOOGLE_CALENDAR_NOTIFICATION_EMAIL`.
+- The Google Apps Script path creates the Google Meet link and sends calendar invites.
+- The service account fallback creates the calendar event from the shared calendar. Personal Gmail calendars may reject Google Meet creation or attendee invitations from service accounts.
 - If neither service account nor Apps Script booking is configured, the modal shows an email fallback instead of failing silently.
+
+## Common Errors
+
+### `Invalid lead payload`
+
+Your Vercel app is calling an older Apps Script deployment that only understands contact form submissions.
+
+Fix:
+
+1. Open the Apps Script project.
+2. Paste the latest code from `integrations/google-apps-script/contact-leads.gs`.
+3. Enable **Services -> Calendar API**.
+4. Click **Deploy -> Manage deployments**.
+5. Edit the web app deployment or create a new version.
+6. Confirm the `/exec` URL in Vercel matches the active deployment.
+7. Redeploy Vercel.
+
+### `Invalid conference type value`
+
+Google rejected Meet creation from the service account calendar path. This is common with personal Gmail calendars. Use the Apps Script path for production booking with attendee invites and Google Meet links.
 
 ## Local Testing
 

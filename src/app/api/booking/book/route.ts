@@ -9,6 +9,7 @@ import {
   createAppsScriptDiscoveryCall,
   getAppsScriptBusyWindows,
   isGoogleBookingAppsScriptConfigured,
+  isAppsScriptSetupError,
 } from "@/lib/integrations/google-booking-apps-script";
 import { checkRateLimit, getRequestIp } from "@/lib/security/rate-limit";
 import { validateBookingPayload } from "@/lib/validations/booking";
@@ -74,6 +75,7 @@ export async function POST(request: Request) {
           durationMinutes: bookingDurationMinutes,
         });
       } catch (appsScriptError) {
+        if (isAppsScriptSetupError(appsScriptError)) throw appsScriptError;
         if (!isGoogleCalendarConfigured()) throw appsScriptError;
         console.error("Apps Script booking failed; falling back to service account", appsScriptError);
       }
@@ -90,10 +92,15 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Booking creation failed", error);
+    const setupError =
+      isAppsScriptSetupError(error) ||
+      (error instanceof Error && /google meet|conference type/i.test(error.message));
+
     return NextResponse.json(
       {
-        error:
-          "We could not create the calendar invite. Please try another time or email hello@mvpready.dev.",
+        error: setupError
+          ? "Booking setup needs one final update: redeploy the latest Apps Script web app version with Calendar API enabled, then redeploy Vercel. Until then, email hello@mvpready.dev to schedule the call."
+          : "We could not create the calendar invite. Please try another time or email hello@mvpready.dev.",
       },
       { status: 502 },
     );

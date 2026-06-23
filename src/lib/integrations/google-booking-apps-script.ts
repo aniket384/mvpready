@@ -8,6 +8,13 @@ type AppsScriptResponse<T> = T & {
   error?: string;
 };
 
+class AppsScriptSetupError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "AppsScriptSetupError";
+  }
+}
+
 function bookingWebhookUrl() {
   return process.env.GOOGLE_BOOKING_WEBHOOK_URL ?? process.env.GOOGLE_SHEETS_WEBHOOK_URL;
 }
@@ -41,10 +48,26 @@ async function postBookingWebhook<T>(body: Record<string, unknown>) {
   const result = (await response.json().catch(() => null)) as AppsScriptResponse<T> | null;
 
   if (!response.ok || !result?.ok) {
-    throw new Error(result?.error ?? "Google Apps Script booking webhook failed.");
+    const message = result?.error ?? "Google Apps Script booking webhook failed.";
+
+    if (
+      /invalid (lead )?payload/i.test(message) ||
+      /advanced calendar api/i.test(message) ||
+      /unauthorized/i.test(message)
+    ) {
+      throw new AppsScriptSetupError(
+        `${message} Redeploy the latest integrations/google-apps-script/contact-leads.gs as a new Apps Script web app version and verify the webhook secret.`,
+      );
+    }
+
+    throw new Error(message);
   }
 
   return result;
+}
+
+export function isAppsScriptSetupError(error: unknown) {
+  return error instanceof AppsScriptSetupError;
 }
 
 export async function getAppsScriptBusyWindows({
