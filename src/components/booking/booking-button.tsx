@@ -238,21 +238,21 @@ function BookingModal({ onClose }: { onClose: () => void }) {
         onClick={closeModal}
         className="fixed inset-0 bg-background/70 backdrop-blur-md"
       />
-      <div className="flex min-h-full items-center justify-center p-4">
+      <div className="flex min-h-full items-start justify-center p-3 py-6 sm:p-6 lg:items-center">
         <div
           ref={panelRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
           aria-describedby={descriptionId}
-          className="relative w-full max-w-4xl overflow-hidden rounded-lg border border-border bg-background shadow-2xl shadow-black/20 dark:shadow-black/50"
+          className="relative flex max-h-[calc(100vh-2rem)] w-full max-w-3xl flex-col overflow-hidden rounded-lg border border-border bg-background shadow-2xl shadow-black/20 dark:shadow-black/50 sm:max-h-[calc(100vh-3rem)]"
         >
-          <div className="flex items-start justify-between gap-4 border-b border-border p-5 sm:p-6">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
+          <div className="flex shrink-0 items-start justify-between gap-4 border-b border-border p-5 sm:p-6">
+            <div className="min-w-0">
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
                 Google Meet discovery call
               </p>
-              <h2 id={titleId} className="mt-2 text-2xl font-medium sm:text-3xl">
+              <h2 id={titleId} className="mt-2 text-2xl font-medium leading-tight sm:text-3xl">
                 Book a free MVP strategy call.
               </h2>
               <p id={descriptionId} className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
@@ -300,11 +300,11 @@ function BookingModal({ onClose }: { onClose: () => void }) {
               </Button>
             </div>
           ) : (
-            <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
-              <div className="border-b border-border p-5 sm:p-6 lg:border-b-0 lg:border-r">
-                <div className="flex items-center justify-between gap-4">
+            <div className="overflow-y-auto">
+              <div className="border-b border-border p-5 sm:p-6">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <h3 className="font-medium">Select a time</h3>
+                    <h3 className="text-base font-medium">Select a time</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
                       Displayed in {availability?.timeZone ?? visitorTimeZone}
                     </p>
@@ -318,7 +318,7 @@ function BookingModal({ onClose }: { onClose: () => void }) {
 
                 {!loadingAvailability && availability?.days.length ? (
                   <div className="mt-5">
-                    <div className="flex gap-2 overflow-x-auto pb-2" aria-label="Available dates">
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5" aria-label="Available dates">
                       {availability.days.map((day) => (
                         <button
                           key={day.date}
@@ -328,17 +328,17 @@ function BookingModal({ onClose }: { onClose: () => void }) {
                             setSelectedSlot(null);
                           }}
                           className={cn(
-                            "min-w-28 rounded-md border px-3 py-2 text-left text-sm transition-colors",
+                            "min-h-11 rounded-md border px-3 py-2 text-left text-sm font-medium transition-colors",
                             activeDay?.date === day.date
-                              ? "border-foreground bg-foreground text-background"
-                              : "border-border text-muted-foreground hover:border-foreground/25 hover:text-foreground",
+                              ? "border-foreground bg-foreground text-background shadow-sm"
+                              : "border-border bg-background text-muted-foreground hover:border-foreground/25 hover:bg-muted hover:text-foreground",
                           )}
                         >
                           {day.label}
                         </button>
                       ))}
                     </div>
-                    <div className="mt-4 grid max-h-80 gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
+                    <div className="mt-4 grid max-h-64 gap-2 overflow-y-auto pr-1 sm:max-h-72 sm:grid-cols-2">
                       {activeDay?.slots.map((slot) => (
                         <button
                           key={slot.start}
@@ -346,10 +346,10 @@ function BookingModal({ onClose }: { onClose: () => void }) {
                           aria-pressed={selectedSlot?.start === slot.start}
                           onClick={() => setSelectedSlot(slot)}
                           className={cn(
-                            "rounded-md border px-3 py-3 text-left text-sm transition-colors",
+                            "rounded-md border px-3 py-3 text-left text-sm font-medium leading-5 transition-colors",
                             selectedSlot?.start === slot.start
-                              ? "border-accent bg-accent/10 text-foreground"
-                              : "border-border text-muted-foreground hover:border-foreground/25 hover:bg-muted hover:text-foreground",
+                              ? "border-accent bg-accent/10 text-foreground shadow-sm ring-1 ring-accent/20"
+                              : "border-border bg-background text-muted-foreground hover:border-foreground/25 hover:bg-muted hover:text-foreground",
                           )}
                         >
                           {slot.timeLabel}
@@ -360,66 +360,77 @@ function BookingModal({ onClose }: { onClose: () => void }) {
                 ) : null}
               </div>
 
-              <form onSubmit={onSubmit} className="grid content-start gap-4 p-5 sm:p-6">
-                <div>
-                  <h3 className="font-medium">Your details</h3>
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                    We use this only for the calendar invite and call context.
-                  </p>
+              <form onSubmit={onSubmit} className="grid gap-5 p-5 sm:p-6">
+                <div className="grid gap-4 rounded-lg border border-border bg-muted/25 p-4 sm:p-5">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="text-base font-medium">Your details</h3>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                        We use this only for the calendar invite and call context.
+                      </p>
+                    </div>
+                    {selectedSlot ? (
+                      <p className="rounded-md border border-border bg-background px-3 py-2 text-sm text-muted-foreground">
+                        <span className="font-medium text-foreground">{selectedSlot.dateLabel}</span>,{" "}
+                        {selectedSlot.timeLabel}
+                      </p>
+                    ) : null}
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <FormField label="Name" htmlFor="booking-name">
+                      <Input id="booking-name" name="name" autoComplete="name" required disabled={submitting} />
+                    </FormField>
+                    <FormField label="Email" htmlFor="booking-email">
+                      <Input
+                        id="booking-email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        disabled={submitting}
+                      />
+                    </FormField>
+                    <div className="sm:col-span-2">
+                      <FormField label="Company (optional)" htmlFor="booking-company">
+                        <Input
+                          id="booking-company"
+                          name="company"
+                          autoComplete="organization"
+                          disabled={submitting}
+                        />
+                      </FormField>
+                    </div>
+                  </div>
+                  <div className="absolute -left-[10000px]" aria-hidden="true">
+                    <label htmlFor="booking-website">Leave this field empty</label>
+                    <input id="booking-website" name="website" tabIndex={-1} autoComplete="off" />
+                  </div>
+                  {!selectedSlot ? (
+                    <p className="rounded-md border border-border bg-background p-3 text-sm text-muted-foreground">
+                      Choose a time to continue.
+                    </p>
+                  ) : null}
+                  {error ? (
+                    <p id={statusId} role="alert" className="text-sm text-red-600">
+                      {error}
+                    </p>
+                  ) : null}
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <Button type="submit" disabled={!selectedSlot || submitting || loadingAvailability} className="w-full sm:w-auto">
+                      {submitting ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Creating invite...
+                        </>
+                      ) : (
+                        "Confirm Google Meet"
+                      )}
+                    </Button>
+                    <p className="text-xs leading-5 text-muted-foreground">
+                      Calendar invite and Meet link are created automatically.
+                    </p>
+                  </div>
                 </div>
-                <FormField label="Name" htmlFor="booking-name">
-                  <Input id="booking-name" name="name" autoComplete="name" required disabled={submitting} />
-                </FormField>
-                <FormField label="Email" htmlFor="booking-email">
-                  <Input
-                    id="booking-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    disabled={submitting}
-                  />
-                </FormField>
-                <FormField label="Company (optional)" htmlFor="booking-company">
-                  <Input
-                    id="booking-company"
-                    name="company"
-                    autoComplete="organization"
-                    disabled={submitting}
-                  />
-                </FormField>
-                <div className="absolute -left-[10000px]" aria-hidden="true">
-                  <label htmlFor="booking-website">Leave this field empty</label>
-                  <input id="booking-website" name="website" tabIndex={-1} autoComplete="off" />
-                </div>
-                {selectedSlot ? (
-                  <p className="rounded-md border border-border bg-muted/35 p-3 text-sm text-muted-foreground">
-                    Selected: <span className="font-medium text-foreground">{selectedSlot.dateLabel}</span>,{" "}
-                    {selectedSlot.timeLabel}
-                  </p>
-                ) : (
-                  <p className="rounded-md border border-border bg-muted/35 p-3 text-sm text-muted-foreground">
-                    Choose a time to continue.
-                  </p>
-                )}
-                {error ? (
-                  <p id={statusId} role="alert" className="text-sm text-red-600">
-                    {error}
-                  </p>
-                ) : null}
-                <Button type="submit" disabled={!selectedSlot || submitting || loadingAvailability}>
-                  {submitting ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Creating invite...
-                    </>
-                  ) : (
-                    "Confirm Google Meet"
-                  )}
-                </Button>
-                <p className="text-xs leading-5 text-muted-foreground">
-                  Calendar invites are sent automatically. If the slot disappears, choose another available time.
-                </p>
               </form>
             </div>
           )}
@@ -439,7 +450,7 @@ function AvailabilitySkeleton() {
       </div>
       <div className="grid gap-2 sm:grid-cols-2">
         {[1, 2, 3, 4, 5, 6].map((item) => (
-          <div key={item} className="h-12 animate-pulse rounded-md bg-muted" />
+          <div key={item} className="h-11 animate-pulse rounded-md bg-muted" />
         ))}
       </div>
     </div>
