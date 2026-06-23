@@ -12,7 +12,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 2 : undefined,
+  workers: 2,
   reporter: process.env.CI ? [["html"], ["github"], ["list"]] : [["list"], ["html"]],
   use: {
     baseURL,
@@ -25,7 +25,7 @@ export default defineConfig({
     : {
         command: "npx next start -H 127.0.0.1",
         url: baseURL,
-        reuseExistingServer: !process.env.CI,
+        reuseExistingServer: false,
         timeout: 60_000,
       },
   projects: [

@@ -63,6 +63,10 @@ test.describe("native booking", () => {
     const dialog = page.getByRole("dialog", { name: /Book a free MVP strategy call/i });
     await expect(dialog).toBeVisible();
     await expect(dialog).toContainText("Displayed in");
+    await expect(page.locator("[data-booking-portal]")).toHaveCSS("z-index", "999");
+    expect(
+      await dialog.evaluate((element) => element.closest("[data-booking-portal]")?.parentElement === document.body),
+    ).toBe(true);
 
     await dialog.getByRole("button", { name: /10:00 AM/i }).click();
     await dialog.getByLabel("Name").fill("Anika Founder");

@@ -2,6 +2,7 @@
 
 import { CalendarDays, CheckCircle2, Loader2, X } from "lucide-react";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { FormField } from "@/components/forms/form-field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,6 +60,13 @@ export function BookingButton({
   variant = "primary",
 }: BookingButtonProps) {
   const [open, setOpen] = useState(false);
+  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPortalRoot(document.body);
+  }, []);
+
+  const modal = open ? <BookingModal onClose={() => setOpen(false)} /> : null;
 
   return (
     <>
@@ -73,7 +81,7 @@ export function BookingButton({
         <CalendarDays size={17} />
         {children}
       </Button>
-      {open ? <BookingModal onClose={() => setOpen(false)} /> : null}
+      {modal && portalRoot ? createPortal(modal, portalRoot) : modal}
     </>
   );
 }
@@ -223,7 +231,7 @@ function BookingModal({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[80] overflow-y-auto" role="presentation">
+    <div className="fixed inset-0 z-[999] overflow-y-auto" role="presentation" data-booking-portal>
       <button
         type="button"
         aria-label="Close booking modal"
