@@ -62,7 +62,11 @@ function doPost(event) {
       return jsonResponse({ ok: true, stored: true, notified: false });
     }
   } catch (error) {
-    return jsonResponse({ ok: false, stored: false, error: "Unable to process submission." });
+    return jsonResponse({
+      ok: false,
+      stored: false,
+      error: "Unable to process submission: " + errorMessage(error),
+    });
   }
 }
 
@@ -78,8 +82,8 @@ function handleBookingBusy(properties, payload) {
   var events = calendar.getEvents(timeMin, timeMax);
   var busy = events.map(function (event) {
     return {
-      start: event.getStartTime().toISOString(),
-      end: event.getEndTime().toISOString(),
+      start: isoDate(event.getStartTime()),
+      end: isoDate(event.getEndTime()),
     };
   });
 
@@ -117,8 +121,8 @@ function handleBookingCreate(properties, payload) {
     {
       summary: "MVPReady Discovery Call",
       description: description,
-      start: { dateTime: start.toISOString() },
-      end: { dateTime: end.toISOString() },
+      start: { dateTime: isoDate(start) },
+      end: { dateTime: isoDate(end) },
       attendees: attendeeEmails.map(function (email) {
         return { email: email };
       }),
@@ -153,8 +157,8 @@ function handleBookingCreate(properties, payload) {
       eventId: event.id,
       htmlLink: event.htmlLink,
       meetLink: meetLink,
-      start: start.toISOString(),
-      end: end.toISOString(),
+      start: isoDate(start),
+      end: isoDate(end),
     },
   });
 }
@@ -239,7 +243,15 @@ function isValidBooking(booking) {
 
 function getBookingCalendar(properties) {
   var calendarId = properties.getProperty("BOOKING_CALENDAR_ID");
-  return calendarId ? CalendarApp.getCalendarById(calendarId) : CalendarApp.getDefaultCalendar();
+  var calendar = calendarId ? CalendarApp.getCalendarById(calendarId) : CalendarApp.getDefaultCalendar();
+
+  if (!calendar) {
+    throw new Error(
+      "Booking calendar was not found. Set BOOKING_CALENDAR_ID to a calendar ID accessible by the Apps Script owner, or deploy the web app to execute as Me.",
+    );
+  }
+
+  return calendar;
 }
 
 function getMeetEntryPoint(event) {
@@ -280,7 +292,7 @@ function storeBooking(properties, booking, event, meetLink) {
   }
 
   sheet.appendRow([
-    new Date().toISOString(),
+    isoDate(new Date()),
     cellValue(booking.name),
     cellValue(booking.email),
     cellValue(booking.company || ""),
@@ -310,6 +322,15 @@ function uniqueEmails(values) {
 function cellValue(value) {
   var text = String(value);
   return /^[=+\-@]/.test(text) ? "'" + text : text;
+}
+
+function isoDate(date) {
+  return Utilities.formatDate(date, "UTC", "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+}
+
+function errorMessage(error) {
+  if (!error) return "Unknown error";
+  return error.message || String(error);
 }
 
 function leadEmailBody(receivedAt, lead) {

@@ -38,7 +38,9 @@ In Apps Script:
    - `BOOKING_SHEET_NAME`, default `Bookings`.
    - `BOOKING_RECIPIENTS`, default uses `LEAD_RECIPIENTS`.
 6. Deploy a new web app version. Apps Script deployments do not update automatically after code changes.
-7. Keep access as **Anyone**.
+7. Set **Execute as** to **Me**.
+8. Set **Who has access** to **Anyone**.
+9. Authorize the requested Google permissions when prompted.
 
 The same webhook handles lead storage, availability, booking creation, Google Meet link generation, and Calendar invitations.
 
@@ -105,8 +107,21 @@ Fix:
 3. Enable **Services -> Calendar API**.
 4. Click **Deploy -> Manage deployments**.
 5. Edit the web app deployment or create a new version.
-6. Confirm the `/exec` URL in Vercel matches the active deployment.
-7. Redeploy Vercel.
+6. Set **Execute as** to **Me** and **Who has access** to **Anyone**.
+7. Confirm the `/exec` URL in Vercel matches the active deployment.
+8. Redeploy Vercel.
+
+### `Unable to process submission`
+
+Apps Script is throwing while reading your calendar.
+
+Fix:
+
+1. In the web app deployment, set **Execute as** to **Me**.
+2. Confirm the script has been authorized for Calendar access.
+3. If you set `BOOKING_CALENDAR_ID`, confirm it is the exact calendar ID from Google Calendar settings.
+4. If you do not need a custom calendar, remove `BOOKING_CALENDAR_ID` so Apps Script uses your primary calendar.
+5. Redeploy a new Apps Script web app version.
 
 ### `Invalid conference type value`
 

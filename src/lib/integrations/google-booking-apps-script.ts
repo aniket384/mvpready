@@ -53,6 +53,8 @@ async function postBookingWebhook<T>(body: Record<string, unknown>) {
     if (
       /invalid (lead )?payload/i.test(message) ||
       /advanced calendar api/i.test(message) ||
+      /unable to process submission/i.test(message) ||
+      /booking calendar was not found/i.test(message) ||
       /unauthorized/i.test(message)
     ) {
       throw new AppsScriptSetupError(
