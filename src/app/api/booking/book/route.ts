@@ -64,16 +64,25 @@ export async function POST(request: Request) {
       );
     }
 
-    const booking = isGoogleCalendarConfigured()
-      ? await createDiscoveryCall({
-          payload: validation.data,
-          startDate,
-        })
-      : await createAppsScriptDiscoveryCall({
+    let booking;
+
+    if (isGoogleBookingAppsScriptConfigured()) {
+      try {
+        booking = await createAppsScriptDiscoveryCall({
           payload: validation.data,
           startDate,
           durationMinutes: bookingDurationMinutes,
         });
+      } catch (appsScriptError) {
+        if (!isGoogleCalendarConfigured()) throw appsScriptError;
+        console.error("Apps Script booking failed; falling back to service account", appsScriptError);
+      }
+    }
+
+    booking ??= await createDiscoveryCall({
+      payload: validation.data,
+      startDate,
+    });
 
     return NextResponse.json({
       message: "Your MVPReady discovery call is booked.",

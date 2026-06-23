@@ -41,9 +41,28 @@ function base64url(input: string | Buffer) {
     .replace(/\//g, "_");
 }
 
+function normalizePrivateKey(value: string) {
+  const key = value
+    .trim()
+    .replace(/^"|"$/g, "")
+    .replace(/^'|'$/g, "")
+    .replace(/\\n/g, "\n")
+    .trim();
+
+  if (!key.includes("-----BEGIN PRIVATE KEY-----") || !key.includes("-----END PRIVATE KEY-----")) {
+    throw new Error(
+      "Invalid GOOGLE_CALENDAR_PRIVATE_KEY. Paste the full private_key value including BEGIN/END PRIVATE KEY lines.",
+    );
+  }
+
+  return key;
+}
+
 async function getAccessToken() {
   const clientEmail = process.env.GOOGLE_CALENDAR_CLIENT_EMAIL;
-  const privateKey = process.env.GOOGLE_CALENDAR_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  const privateKey = process.env.GOOGLE_CALENDAR_PRIVATE_KEY
+    ? normalizePrivateKey(process.env.GOOGLE_CALENDAR_PRIVATE_KEY)
+    : "";
 
   if (!clientEmail || !privateKey) {
     throw new Error("Google Calendar service account credentials are not configured.");
@@ -61,7 +80,17 @@ async function getAccessToken() {
     }),
   );
   const unsignedToken = `${header}.${claim}`;
-  const signature = createSign("RSA-SHA256").update(unsignedToken).sign(privateKey);
+  let signature: Buffer;
+
+  try {
+    signature = createSign("RSA-SHA256").update(unsignedToken).sign(privateKey);
+  } catch (error) {
+    throw new Error(
+      "Invalid GOOGLE_CALENDAR_PRIVATE_KEY. Remove JSON field names, trailing commas, and surrounding quotes; keep the full BEGIN/END PRIVATE KEY value.",
+      { cause: error },
+    );
+  }
+
   const assertion = `${unsignedToken}.${base64url(signature)}`;
 
   const response = await fetch(tokenUrl, {
@@ -131,7 +160,6 @@ export async function createDiscoveryCall({
   if (!calendarId) throw new Error("GOOGLE_CALENDAR_ID is not configured.");
 
   const endDate = new Date(startDate.getTime() + durationMinutes * 60 * 1000);
-  const notificationEmail = bookingNotificationEmail();
   const descriptionLines = [
     "Free strategy call to discuss your startup idea and MVP requirements.",
     "",
@@ -147,7 +175,7 @@ export async function createDiscoveryCall({
     hangoutLink?: string;
     conferenceData?: { entryPoints?: Array<{ entryPointType?: string; uri?: string }> };
   }>(
-    `/calendars/${encodeURIComponent(calendarId)}/events?conferenceDataVersion=1&sendUpdates=all`,
+    `/calendars/${encodeURIComponent(calendarId)}/events?conferenceDataVersion=1`,
     {
       method: "POST",
       body: JSON.stringify({
@@ -155,10 +183,6 @@ export async function createDiscoveryCall({
         description: descriptionLines.join("\n"),
         start: { dateTime: startDate.toISOString(), timeZone: "UTC" },
         end: { dateTime: endDate.toISOString(), timeZone: "UTC" },
-        attendees: [
-          { email: payload.email, displayName: payload.name },
-          { email: notificationEmail, displayName: "MVPReady" },
-        ],
         guestsCanInviteOthers: false,
         guestsCanModify: false,
         guestsCanSeeOtherGuests: true,

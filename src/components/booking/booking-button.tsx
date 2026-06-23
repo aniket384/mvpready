@@ -278,7 +278,7 @@ function BookingModal({ onClose }: { onClose: () => void }) {
               <div>
                 <h3 className="text-2xl font-medium">Your call is booked.</h3>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
-                  A Google Calendar invitation and Google Meet link have been sent to your email. The MVPReady team has also been notified.
+                  Your Google Meet link is ready and the call is on the MVPReady calendar. If invite delivery is enabled, the calendar invitation has also been sent to your email.
                 </p>
               </div>
               <div className="grid gap-3 rounded-lg border border-border bg-muted/35 p-4 text-sm">
